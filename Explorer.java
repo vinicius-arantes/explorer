@@ -14,6 +14,22 @@ public class Explorer extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        movimentar();
+    }
+    
+    public void movimentar() {
+        // Movimento com as setas do teclado
+        if (Greenfoot.isKeyDown("w")) {
+            setLocation(getX(), getY() - 2); // Move para cima
+        }
+        if (Greenfoot.isKeyDown("s")) {
+            setLocation(getX(), getY() + 2); // Move para baixo
+        }
+        if (Greenfoot.isKeyDown("a")) {
+            setLocation(getX() - 2, getY()); // Move para a esquerda
+        }
+        if (Greenfoot.isKeyDown("d")) {
+            setLocation(getX() + 2, getY()); // Move para a direita
+        }
     }
 }
