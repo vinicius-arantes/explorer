@@ -8,12 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Inventory extends Actor
 {
-    private int Log;
-    private int Stone;
-    private int Copper;
-    private int Tin;
-    private int Bronze;
-    private int Iron;
+    private int log;
+    private int stone;
+    private int copper;
+    private int tin;
+    private int bronze;
+    private int iron;
+    private boolean hudVisible;
     
     /**
      * Act - do whatever the Inventory wants to do. This method is called whenever
@@ -21,18 +22,22 @@ public class Inventory extends Actor
      */
     public void act()
     {
-        updateHUD();
+        handleHUDToggle();
+        if (hudVisible) {
+            updateHUD();
+        }
     }
     
     public Inventory()
     {
         setImageInitial();
-        Log = 0;
-        Stone = 0;
-        Copper = 0;
-        Tin = 0;
-        Bronze = 0;
-        Iron = 0;
+        log = 0;
+        stone = 0;
+        copper = 0;
+        tin = 0;
+        bronze = 0;
+        iron = 0;
+        hudVisible = true;
     }
     
     public void setImageInitial()
@@ -45,6 +50,8 @@ public class Inventory extends Actor
         imagem.setTransparency(240);
         // Aplica a imagem
         setImage(imagem);
+        //Atualiza a HUD
+        updateHUD();
     }
     
     public void updateHUD()
@@ -53,43 +60,79 @@ public class Inventory extends Actor
         GreenfootImage imagem = new GreenfootImage("HUD.png");
         imagem.scale(320, 150);
         imagem.setTransparency(240);
-
+        
+        // Adiciona o texto do número de Log
+        GreenfootImage textoLog = new GreenfootImage("Troncos: " + log, 20, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoLog, 20, 10); // Posiciona o texto no HUD
+        // Adiciona o texto do número de Stone
+        GreenfootImage textoStone = new GreenfootImage("Pedras: " + stone, 20, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoStone, 20, 40); // Posiciona o texto no HUD
+        
+        // Adiciona o texto do número de Copper
+        GreenfootImage textoCopper = new GreenfootImage("Cobres: " + copper, 20, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoCopper, 100, 10); // Posiciona o texto no HUD
+        // Adiciona o texto do número de Tin
+        GreenfootImage textoTin = new GreenfootImage("Estanhos: " + tin, 20, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoTin, 100, 40); // Posiciona o texto no HUD
         // Adiciona o texto do número de Bronze
-        GreenfootImage textoBronze = new GreenfootImage("Bronze: " + Bronze, 20, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoBronze, 20, 20); // Posiciona o texto no HUD
+        
+        GreenfootImage textoBronze = new GreenfootImage("Bronzes: " + bronze, 20, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoBronze, 200, 10); // Posiciona o texto no HUD
+        // Adiciona o texto do número de Iron
+        GreenfootImage textoIron = new GreenfootImage("Ferros: " + iron, 20, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoIron, 200, 40); // Posiciona o texto no HUD
+        
+        
+        
+        
+        
 
         // Define a nova imagem
         setImage(imagem);
     }
     
+    public void handleHUDToggle()
+    {
+        if (Greenfoot.isKeyDown("e"))
+        {
+            hudVisible = !hudVisible; // Alterna o estado
+            if (hudVisible) {
+                setImageInitial();
+            } else {
+                setImage((GreenfootImage) null); // Oculta o HUD
+            }
+            Greenfoot.delay(10); // Evita repetição rápida ao segurar a tecla
+        }
+    }
+    
     public void takeItenLog()
     {
-        Log++;
+        log++;
     }
     
     public void takeItenStone()
     {
-        Stone++;
+        stone++;
     }
     
     public void takeItenCopper()
     {
-        Copper++;
+        copper++;
     }
     
     public void takeItenTin()
     {
-        Tin++;
+        tin++;
     }
     
     public void takeItenBronze()
     {
-        Bronze++;
+        bronze++;
     }
     
     public void takeItenIron()
     {
-        Iron++;
+        iron++;
     }
     
 }
