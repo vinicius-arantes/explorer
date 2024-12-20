@@ -8,12 +8,71 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Island extends Actor
 {
+    private String biomeName = "overworld";
+    private String biomeType = "overworld";
+    private boolean visible;
+    public Island(String biomeName, String biomeType){
+        prepareBiomes(biomeName, biomeType);
+    }
+    
+    public void prepareBiomes(String biomeName, String biomeType){
+        if(biomeType.contains("overworld")){
+            this.biomeName = biomeName;
+            this.biomeType = biomeType;
+        } else if(biomeType.contains("tundra")) {
+            this.biomeName = biomeName;
+            this.biomeType = biomeType;
+            GreenfootImage image = getImage();
+            image.setTransparency(0);
+            setImage(image);
+        } else if(biomeType.contains("desert")) {
+            this.biomeName = biomeName;
+            this.biomeType = biomeType;
+            setImage("Island (5).png");
+            GreenfootImage image = getImage();
+            image.setTransparency(0);
+            setImage(image);
+        } else if(biomeType.contains("heaven")) {
+            this.biomeName = biomeName;
+            this.biomeType = biomeType;
+            GreenfootImage image = getImage();
+            image.setTransparency(0);
+            setImage(image);
+        } else if(biomeType.contains("graveyard")) {
+            this.biomeName = biomeName;
+            this.biomeType = biomeType;
+            GreenfootImage image = getImage();
+            image.setTransparency(0);
+            setImage(image);
+        }
+        
+        if(biomeName.contains("mainOverworld")){
+            visible = true;
+        } else {
+            visible = false;
+        }
+    }
+    
     /**
      * Act - do whatever the Island wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        // Add your action code here.
+        if (Greenfoot.isKeyDown("m")){
+            MyWorld myWorld = (MyWorld)getWorld();
+            myWorld.showIslands();
+        } else {
+            MyWorld myWorld = (MyWorld)getWorld();
+            myWorld.hideIslands();
+        }
+    }
+    
+    public boolean isVisible(){
+        return visible;
+    }
+    
+    public String getName(){
+        return biomeName;
     }
 }

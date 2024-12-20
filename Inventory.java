@@ -101,7 +101,7 @@ public class Inventory extends Actor
             } else {
                 setImage((GreenfootImage) null); // Oculta o HUD
             }
-            Greenfoot.delay(10); // Evita repetição rápida ao segurar a tecla
+            Greenfoot.delay(30); // Evita repetição rápida ao segurar a tecla
         }
     }
     
