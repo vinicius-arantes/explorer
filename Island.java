@@ -22,13 +22,14 @@ public class Island extends Actor
         } else if(biomeType.contains("tundra")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
+            setImage("tundraBiome.png");
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
         } else if(biomeType.contains("desert")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            setImage("Island (5).png");
+            setImage("desertBiome.png");
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
