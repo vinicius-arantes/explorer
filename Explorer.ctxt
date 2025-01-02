@@ -8,6 +8,4 @@ comment2.params=
 comment2.target=void\ movimentar()
 comment3.params=
 comment3.target=void\ limitToBorder()
-comment4.params=
-comment4.target=void\ showIslands()
-numComments=5
+numComments=4

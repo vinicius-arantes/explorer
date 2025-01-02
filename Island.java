@@ -12,13 +12,20 @@ public class Island extends Actor
     private String biomeType = "overworld";
     private boolean visible;
     public Island(String biomeName, String biomeType){
+        visible = false;
         prepareBiomes(biomeName, biomeType);
     }
     
     public void prepareBiomes(String biomeName, String biomeType){
-        if(biomeType.contains("overworld")){
+        if(biomeType.contains("mainOverworld")){
             this.biomeName = biomeName;
             this.biomeType = biomeType;
+        }else if(biomeType.contains("overworld")){
+            this.biomeName = biomeName;
+            this.biomeType = biomeType;
+            GreenfootImage image = getImage();
+            image.setTransparency(0);
+            setImage(image);
         } else if(biomeType.contains("tundra")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
@@ -76,4 +83,9 @@ public class Island extends Actor
     public String getName(){
         return biomeName;
     }
+    
+    public void setVisibility(){
+        visible = true;
+    }
+    
 }

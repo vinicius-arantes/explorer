@@ -16,7 +16,6 @@ public class Explorer extends Actor
     {
         movimentar();
         limitToBorder();
-        showIslands();
     }
     
     public void movimentar() {
@@ -53,9 +52,5 @@ public class Explorer extends Actor
                 setLocation(getX() - 2, getY()); // Nega o movimento pra direita
             }
         }
-    }
-    
-    public void showIslands(){
-                   
     }
 }

@@ -15,7 +15,7 @@ public class Log extends Actor
     public void act()
     {
         if (isTouching(Explorer.class)) {
-            // Aumenta a quantidade de Bronze no Inventory
+            // Aumenta a quantidade de Log no Inventory
             Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
             if (inventory != null) {
                 inventory.takeItenLog();

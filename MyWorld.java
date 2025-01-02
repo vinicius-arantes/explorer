@@ -21,17 +21,42 @@ public class MyWorld extends World {
     }
 
     public void prepare() {
+        Island tundra2 = new Island("tundra2", "tundra");
+        addObject(tundra2, 200, 125);
+        islandsMap.put(tundra2.getName(), tundra2);
+        
         Island desert = new Island("desert1", "desert");
         addObject(desert, 200, 375);
         islandsMap.put(desert.getName(), desert);
 
-        Island island = new Island("mainOverworld", "overworld");
+        Island heaven = new Island("heaven1", "heaven");
+        addObject(heaven, 600, 125);
+        islandsMap.put(heaven.getName(), heaven);
+        
+        Island island = new Island("mainOverworld", "mainOverworld");
+        island.setVisibility();
         addObject(island, 600, 375);
         islandsMap.put(island.getName(), island);
 
         Island tundra = new Island("tundra1", "tundra");
         addObject(tundra, 1000, 375);
         islandsMap.put(tundra.getName(), tundra);
+        
+        Island desert2 = new Island("desert2", "desert");
+        addObject(desert2, 1000, 625);
+        islandsMap.put(desert2.getName(), desert2);
+        
+        Island overworld = new Island("overworld", "overworld");
+        addObject(overworld, 200, 625);
+        islandsMap.put(overworld.getName(), overworld);
+        
+        Island graveyard = new Island("graveyard1", "graveyard");
+        addObject(graveyard, 600, 625);
+        islandsMap.put(graveyard.getName(), graveyard);
+        
+        Island graveyard2 = new Island("graveyard2", "graveyard");
+        addObject(graveyard2, 1000, 125);
+        islandsMap.put(graveyard2.getName(), graveyard2);
 
         Border desertBorder1 = new Border("desert1");
         addObject(desertBorder1, 801, 375);
