@@ -85,27 +85,23 @@ public class MyWorld extends World {
         HUDCoins hud = new HUDCoins();
         addObject(hud, 50, 20);
     }
-
-    public void showIslands() {
-        {
-            for (Island island : islandsMap.values()) {
-                if (!island.isVisible()) {
-                    GreenfootImage image = island.getImage();
-                    image.setTransparency(150);
-                    island.setImage(image);
-                }
+    
+    public void showIslands(){
+        for(Island island : islandsMap.values()){
+            if(!island.isVisible()){
+                GreenfootImage image = island.getImage();
+                image.setTransparency(150);
+                island.setImage(image);
             }
         }
     }
-
-    public void hideIslands() {
-        {
-            for (Island island : islandsMap.values()) {
-                if (!island.isVisible()) {
-                    GreenfootImage image = island.getImage();
-                    image.setTransparency(0);
-                    island.setImage(image);
-                }
+    
+    public void hideIslands(){
+        for(Island island : islandsMap.values()){
+            if(!island.isVisible()){
+                GreenfootImage image = island.getImage();
+                image.setTransparency(0);
+                island.setImage(image);
             }
         }
     }

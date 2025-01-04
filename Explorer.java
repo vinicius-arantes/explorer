@@ -53,4 +53,8 @@ public class Explorer extends Actor
             }
         }
     }
+    
+    public void showIslands(){
+                   
+    }
 }

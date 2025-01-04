@@ -84,6 +84,14 @@ public class Island extends Actor
         return biomeName;
     }
     
+    public boolean isVisible(){
+        return visible;
+    }
+    
+    public String getName(){
+        return biomeName;
+    }
+    
     public void setVisibility(){
         visible = true;
     }
