@@ -70,6 +70,7 @@ public class Island extends Actor
         if (Greenfoot.isKeyDown("m")){
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.showIslands();
+            buyIsland();
         } else {
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.hideIslands();
@@ -84,16 +85,19 @@ public class Island extends Actor
         return biomeName;
     }
     
-    public boolean isVisible(){
-        return visible;
-    }
-    
-    public String getName(){
-        return biomeName;
-    }
-    
     public void setVisibility(){
         visible = true;
     }
     
+    public void buyIsland(){
+        if(Greenfoot.mouseClicked(this)){    
+            setVisibility();
+            GreenfootImage image = getImage();
+            image.setTransparency(255);
+            setImage(image);
+            
+            MyWorld myWorld = (MyWorld)getWorld();
+            myWorld.removeBorders(this.getName());
+        }
+    }
 }
