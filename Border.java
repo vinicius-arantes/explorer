@@ -9,10 +9,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Border extends Actor
 {
     private String biomeName;
-    public Border(String biomeName){
+    public Border(String biomeName, int x, int y){
         this.biomeName = biomeName;
         GreenfootImage image = getImage();  
-        image.scale(1, 250);
+        image.scale(x, y);
         image.setTransparency(0);
         setImage(image);
     }

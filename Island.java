@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class Island here.
@@ -11,9 +12,14 @@ public class Island extends Actor
     private String biomeName = "overworld";
     private String biomeType = "overworld";
     private boolean visible;
+    private int timeCounting;
+    private int treeCounting;
+    
     public Island(String biomeName, String biomeType){
         visible = false;
         prepareBiomes(biomeName, biomeType);
+        timeCounting = 0;
+        timeCounting = 0;
     }
     
     public void prepareBiomes(String biomeName, String biomeType){
@@ -56,8 +62,6 @@ public class Island extends Actor
         
         if(biomeName.contains("mainOverworld")){
             visible = true;
-        } else {
-            visible = false;
         }
     }
     
@@ -67,6 +71,7 @@ public class Island extends Actor
      */
     public void act()
     {
+        timeCounting++;
         if (Greenfoot.isKeyDown("m")){
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.showIslands();
@@ -74,6 +79,20 @@ public class Island extends Actor
         } else {
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.hideIslands();
+        }
+        
+        MyWorld myWorld = (MyWorld)getWorld();
+        int maxX = this.getX() + 200;
+        int minX = this.getX() - 200; 
+        int maxY = this.getY() + 125;
+        int minY = this.getY() - 125;
+        
+        int x = Greenfoot.getRandomNumber((maxX - minX + 1) + minX);
+        int y = Greenfoot.getRandomNumber((maxY - minY + 1) + minY);
+        if(isVisible() && timeCounting == 20 && treeCounting <= 10){
+            myWorld.addObject(new Tree(getType()), x, y);
+            timeCounting = 0;
+            treeCounting++;
         }
     }
     
@@ -83,6 +102,10 @@ public class Island extends Actor
     
     public String getName(){
         return biomeName;
+    }
+    
+    public String getType(){
+        return biomeType;
     }
     
     public void setVisibility(){

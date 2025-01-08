@@ -60,34 +60,8 @@ public class MyWorld extends World {
         addObject(desert2, 1000, 625);
         islandsMap.put(desert2.getName(), desert2);
         
-        Border desertBorder1 = new Border("desert1");
-        addObject(desertBorder1, 393, 375);
-        bordersMap.add(desertBorder1);
-
-        Border tundraBorder1 = new Border("tundra1");
-        addObject(tundraBorder1, 801, 375);
-        bordersMap.add(tundraBorder1);
-
-        Border graveyardBorder1 = new Border("graveyard1");
-        graveyardBorder1.turn(90);
-        addObject(graveyardBorder1, 505, 492);
-        bordersMap.add(graveyardBorder1);
+        setBorders();
         
-        Border graveyardBorder2 = new Border("graveyard1");
-        graveyardBorder2.turn(90);
-        addObject(graveyardBorder2, 670, 492);
-        bordersMap.add(graveyardBorder2);
-
-        Border heavenBorder1 = new Border("heaven1");
-        heavenBorder1.turn(90);
-        addObject(heavenBorder1, 505, 217);
-        bordersMap.add(heavenBorder1);
-        
-        Border heavenBorder2 = new Border("heaven1");
-        heavenBorder2.turn(90);
-        addObject(heavenBorder2, 669, 217);
-        bordersMap.add(heavenBorder2);
-
         Explorer explorer = new Explorer();
         addObject(explorer, 600, 375);
         
@@ -96,6 +70,88 @@ public class MyWorld extends World {
         
         HUDCoins hud = new HUDCoins();
         addObject(hud, 50, 20);
+    }
+    
+    public void setBorders(){
+        Border mainToGrave = new Border("graveyard1", 400, 1);
+        addObject(mainToGrave, 595, 492);
+        bordersMap.add(mainToGrave);
+        
+        Border mainToHeaven = new Border("heaven1", 400, 1);
+        addObject(mainToHeaven, 595, 220);
+        bordersMap.add(mainToHeaven);
+        
+        Border mainToDesert = new Border("desert1", 1, 240);
+        addObject(mainToDesert, 380, 355);
+        bordersMap.add(mainToDesert);
+        
+        Border mainToTundra = new Border("tundra1", 1, 240);
+        addObject(mainToTundra, 795, 355);
+        bordersMap.add(mainToTundra);
+        
+        Border heavenToTundra2 = new Border("tundra2", 1, 240);
+        addObject(heavenToTundra2, 380, 100);
+        bordersMap.add(heavenToTundra2);
+        
+        Border heavenToGraveyard2 = new Border("graveyard2", 1, 240);
+        addObject(heavenToGraveyard2, 795, 100);
+        bordersMap.add(heavenToGraveyard2);
+        
+        Border graveyardToOverw = new Border("overworld", 1, 240);
+        addObject(graveyardToOverw, 380, 625);
+        bordersMap.add(graveyardToOverw);
+        
+        Border graveyardToDesert2 = new Border("desert2", 1, 240);
+        addObject(graveyardToDesert2, 795, 625);
+        bordersMap.add(graveyardToDesert2);
+        
+        Border tundraToDesert2 = new Border("desert2", 400, 1);
+        addObject(tundraToDesert2, 1000, 492);
+        bordersMap.add(tundraToDesert2);
+        
+        Border tundraToGraveyard2 = new Border("graveyard2", 400, 1);
+        addObject(tundraToGraveyard2, 1000, 220);
+        bordersMap.add(tundraToGraveyard2);
+        
+        Border desertToOverw = new Border("overworld", 400, 1);
+        addObject(desertToOverw, 180, 492);
+        bordersMap.add(desertToOverw);
+        
+        Border desertToTundra2 = new Border("tundra2", 400, 1);
+        addObject(desertToTundra2, 180, 220);
+        bordersMap.add(desertToTundra2);
+        
+        Border overworldToGrave = new Border("graveyard1", 1, 240);
+        addObject(overworldToGrave, 400, 625);
+        bordersMap.add(overworldToGrave);
+        
+        Border overworldToDesert = new Border("desert1", 400, 1);
+        addObject(overworldToDesert, 180, 472);
+        bordersMap.add(overworldToDesert);
+        
+        Border tundra2ToHeaven = new Border("heaven1", 1, 240);
+        addObject(tundra2ToHeaven, 400, 100);
+        bordersMap.add(tundra2ToHeaven);
+        
+        Border tundra2ToDesert = new Border("desert1", 400, 1);
+        addObject(tundra2ToDesert, 180, 240);
+        bordersMap.add(tundra2ToDesert);
+        
+        Border desert2ToTundra = new Border("tundra1", 400, 1);
+        addObject(desert2ToTundra, 1000, 472);
+        bordersMap.add(desert2ToTundra);
+        
+        Border desert2ToGrave = new Border("graveyard1", 1, 240);
+        addObject(desert2ToGrave, 775, 625);
+        bordersMap.add(desert2ToGrave);
+        
+        Border graveyard2ToHeaven = new Border("heaven1", 1, 240);
+        addObject(graveyard2ToHeaven, 775, 100);
+        bordersMap.add(graveyard2ToHeaven);
+        
+        Border graveyard2ToTundra = new Border("tundra1", 400, 1);
+        addObject(graveyard2ToTundra, 1000, 240);
+        bordersMap.add(graveyard2ToTundra);
     }
     
     public void showIslands(){
@@ -121,19 +177,19 @@ public class MyWorld extends World {
     public boolean canBeVisualized(Island island){
         String islandName = island.getName();
         if(islandName == "graveyard2"){
-            if(!islandsMap.get("heaven1").isVisible() || !islandsMap.get("tundra1").isVisible()){
+            if(!islandsMap.get("heaven1").isVisible() && !islandsMap.get("tundra1").isVisible()){
                 return false;
             }
         } else if (islandName == "tundra2"){
-            if(!islandsMap.get("heaven1").isVisible() || !islandsMap.get("desert1").isVisible()){
+            if(!islandsMap.get("heaven1").isVisible() && !islandsMap.get("desert1").isVisible()){
                 return false;
             }
         } else if (islandName == "overworld"){
-            if(!islandsMap.get("graveyard1").isVisible() || !islandsMap.get("desert1").isVisible()){
+            if(!islandsMap.get("graveyard1").isVisible() && !islandsMap.get("desert1").isVisible()){
                 return false;
             }
         } else if (islandName == "desert2"){
-            if(!islandsMap.get("graveyard1").isVisible() || !islandsMap.get("tundra1").isVisible()){
+            if(!islandsMap.get("graveyard1").isVisible() && !islandsMap.get("tundra1").isVisible()){
                 return false;
             }
         }
