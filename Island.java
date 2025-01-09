@@ -113,12 +113,22 @@ public class Island extends Actor
         }
     }
     
+    public boolean haveObjectsAtTheseCords(int x, int y){
+        MyWorld myWorld = (MyWorld)getWorld();
+        List<Actor> objectsAtTheseCords = myWorld.getObjectsAt(x, y, null);
+        for(Actor object : objectsAtTheseCords){
+            if(object.getClass().getName() != "Island"){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void natureSpawns(){
         MyWorld myWorld = (MyWorld)getWorld();
         int x = Greenfoot.getRandomNumber((getX() + 180) - (getX() - 200) + 1) + (getX() - 200);
         int y = Greenfoot.getRandomNumber((getY() + 97) - (getY() - 125) + 1) + (getY() - 125);
-        List<Tree> treesAtThisCords = myWorld.getObjectsAt(x, y, Tree.class);
-        if(isVisible() && timeCounting == 10 && treeCounting <= 10 && treesAtThisCords.isEmpty()){
+        if(isVisible() && timeCounting >= 1000 && treeCounting <= 10 && !haveObjectsAtTheseCords(x, y)){
             myWorld.addObject(new Tree(getType()), x, y);
             timeCounting = 0;
             treeCounting++;

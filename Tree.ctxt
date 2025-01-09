@@ -8,4 +8,6 @@ comment2.target=void\ act()
 comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ Tree\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ '\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment3.params=biomeType
 comment3.target=void\ prepareBiome(java.lang.String)
-numComments=4
+comment4.params=
+comment4.target=void\ decreaseLife()
+numComments=5

@@ -8,6 +8,12 @@ import java.util.List;
  */
 public class Explorer extends Actor
 {
+    private int damageCapability;
+    
+    public Explorer(){
+        damageCapability = 20;
+    }
+    
     /**
      * Act - do whatever the Explorer wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -55,7 +61,7 @@ public class Explorer extends Actor
         }
     }
     
-    public void showIslands(){
-                   
+    public int getDamageCapability(){
+        return damageCapability;
     }
 }

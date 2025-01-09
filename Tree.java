@@ -8,9 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo
 public class Tree extends Actor
 {
     private String biomeType;
+    private int life;
     
     public Tree(String biomeType){
         prepareBiome(biomeType);
+        life = 100;
     }
     
     /**
@@ -19,6 +21,12 @@ public class Tree extends Actor
      */
     public void act()
     {
+        if(life > 0){
+            decreaseLife();
+        } else {
+            MyWorld myWorld = (MyWorld)getWorld();
+            myWorld.removeObject(this);
+        }
     }
     
     public void prepareBiome(String biomeType){
@@ -30,6 +38,17 @@ public class Tree extends Actor
         }else if(biomeType.contains("desert")){
             this.biomeType = biomeType;
             setImage("Cactus.png");
+        }
+    }
+    
+    public void decreaseLife(){
+        if(Greenfoot.mouseClicked(this)){
+            Explorer explorer = (Explorer) getWorld().getObjects(Explorer.class).get(0);
+            double distance = Math.sqrt(Math.pow(explorer.getX() - getX(), 2) + Math.pow(explorer.getY() - getY(), 2));
+            if(distance < 200){
+                life -= explorer.getDamageCapability();
+                Greenfoot.delay(20);
+            }
         }
     }
 }
