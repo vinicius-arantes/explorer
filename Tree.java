@@ -26,6 +26,7 @@ public class Tree extends Actor
         } else {
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.addObject(new Log(), getX(), getY());
+            getWorld().getObjectsAt(getX(), getY(), Island.class).get(0).setTreeCounting(-1);
             myWorld.removeObject(this);
         }
     }

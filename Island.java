@@ -12,14 +12,17 @@ public class Island extends Actor
     private String biomeName = "overworld";
     private String biomeType = "overworld";
     private boolean visible;
-    private int timeCounting;
+    private int treeTimeCounting;
+    private int stoneTimeCounting;
     private int treeCounting;
+    private int stoneCounting;
     
     public Island(String biomeName, String biomeType){
         visible = false;
         prepareBiomes(biomeName, biomeType);
-        timeCounting = 0;
-        timeCounting = 0;
+        treeTimeCounting = 0;
+        treeCounting = 0;
+        stoneCounting = 0;
     }
     
     public void prepareBiomes(String biomeName, String biomeType){
@@ -71,8 +74,11 @@ public class Island extends Actor
      */
     public void act()
     {
-        if(isVisible()){
-            timeCounting++;
+        if(isVisible() && treeCounting != 10){
+            treeTimeCounting++;
+        }
+        if(isVisible() && stoneCounting != 8){
+            stoneTimeCounting++;
         }
         if (Greenfoot.isKeyDown("m")){
             MyWorld myWorld = (MyWorld)getWorld();
@@ -99,6 +105,22 @@ public class Island extends Actor
     
     public void setVisibility(){
         visible = true;
+    }
+    
+    public int getTreeCounting(){
+        return treeCounting;
+    }
+    
+    public void setTreeCounting(int valueChange){
+        treeCounting += valueChange;
+    }
+    
+    public int getStoneCounting(){
+        return stoneCounting;
+    }
+    
+    public void setStoneCounting(int valueChange){
+        stoneCounting += valueChange;
     }
     
     public void buyIsland(){
@@ -128,10 +150,16 @@ public class Island extends Actor
         MyWorld myWorld = (MyWorld)getWorld();
         int x = Greenfoot.getRandomNumber((getX() + 180) - (getX() - 200) + 1) + (getX() - 200);
         int y = Greenfoot.getRandomNumber((getY() + 97) - (getY() - 125) + 1) + (getY() - 125);
-        if(isVisible() && timeCounting >= 1000 && treeCounting <= 10 && !haveObjectsAtTheseCords(x, y)){
+        if(isVisible() && treeTimeCounting >= 1000 && treeCounting <= 10 && !haveObjectsAtTheseCords(x, y)){
             myWorld.addObject(new Tree(getType()), x, y);
-            timeCounting = 0;
+            treeTimeCounting = 0;
             treeCounting++;
+        }
+        
+        if(isVisible() && stoneTimeCounting >= 1343 && stoneCounting <= 8 && !haveObjectsAtTheseCords(x, y)){
+            myWorld.addObject(new Stone(getType()), x, y);
+            stoneTimeCounting = 0;
+            stoneCounting++;
         }
     }
 }

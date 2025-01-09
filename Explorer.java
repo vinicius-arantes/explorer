@@ -43,9 +43,7 @@ public class Explorer extends Actor
     }
     
     public void colisions(){
-        Actor border = getOneIntersectingObject(Border.class);
-        Actor tree = getOneIntersectingObject(Tree.class);
-        if(border != null || tree != null){
+        if(haveIntersectingObjects()){
             if (Greenfoot.isKeyDown("w")) {
                 setLocation(getX(), getY() + 2); // Nega o movimento pra cima
             }
@@ -59,6 +57,16 @@ public class Explorer extends Actor
                 setLocation(getX() - 2, getY()); // Nega o movimento pra direita
             }
         }
+    }
+    
+    public boolean haveIntersectingObjects(){
+        Actor border = getOneIntersectingObject(Border.class);
+        Actor tree = getOneIntersectingObject(Tree.class);
+        Actor stone = getOneIntersectingObject(Stone.class);
+        if(border != null || tree != null || stone != null){
+            return true;
+        }
+        return false;
     }
     
     public int getDamageCapability(){
