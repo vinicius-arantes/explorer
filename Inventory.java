@@ -118,6 +118,9 @@ public class Inventory extends Actor {
             hudVisible = !hudVisible; // Alterna o estado
             if (hudVisible) {
                 setImageInitial();
+                MyWorld myWorld = (MyWorld)getWorld();
+                myWorld.removeObject(this);
+                myWorld.addObject(this, myWorld.getWidth() / 2, myWorld.getHeight() / 2);
             } else {
                 setImage((GreenfootImage) null); // Oculta o HUD
             }

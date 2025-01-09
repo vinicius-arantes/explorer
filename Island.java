@@ -71,7 +71,9 @@ public class Island extends Actor
      */
     public void act()
     {
-        timeCounting++;
+        if(isVisible()){
+            timeCounting++;
+        }
         if (Greenfoot.isKeyDown("m")){
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.showIslands();
@@ -80,20 +82,7 @@ public class Island extends Actor
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.hideIslands();
         }
-        
-        MyWorld myWorld = (MyWorld)getWorld();
-        int maxX = this.getX() + 200;
-        int minX = this.getX() - 200; 
-        int maxY = this.getY() + 125;
-        int minY = this.getY() - 125;
-        
-        int x = Greenfoot.getRandomNumber((maxX - minX + 1) + minX);
-        int y = Greenfoot.getRandomNumber((maxY - minY + 1) + minY);
-        if(isVisible() && timeCounting == 20 && treeCounting <= 10){
-            myWorld.addObject(new Tree(getType()), x, y);
-            timeCounting = 0;
-            treeCounting++;
-        }
+        natureSpawns();
     }
     
     public boolean isVisible(){
@@ -121,6 +110,18 @@ public class Island extends Actor
             
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.removeBorders(this.getName());
+        }
+    }
+    
+    public void natureSpawns(){
+        MyWorld myWorld = (MyWorld)getWorld();
+        int x = Greenfoot.getRandomNumber((getX() + 180) - (getX() - 200) + 1) + (getX() - 200);
+        int y = Greenfoot.getRandomNumber((getY() + 97) - (getY() - 125) + 1) + (getY() - 125);
+        List<Tree> treesAtThisCords = myWorld.getObjectsAt(x, y, Tree.class);
+        if(isVisible() && timeCounting == 10 && treeCounting <= 10 && treesAtThisCords.isEmpty()){
+            myWorld.addObject(new Tree(getType()), x, y);
+            timeCounting = 0;
+            treeCounting++;
         }
     }
 }

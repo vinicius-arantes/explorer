@@ -18,4 +18,6 @@ comment7.params=
 comment7.target=void\ setVisibility()
 comment8.params=
 comment8.target=void\ buyIsland()
-numComments=9
+comment9.params=
+comment9.target=void\ natureSpawns()
+numComments=10

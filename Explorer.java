@@ -15,7 +15,7 @@ public class Explorer extends Actor
     public void act()
     {
         movimentar();
-        limitToBorder();
+        colisions();
     }
     
     public void movimentar() {
@@ -36,9 +36,10 @@ public class Explorer extends Actor
         }
     }
     
-    public void limitToBorder(){
+    public void colisions(){
         Actor border = getOneIntersectingObject(Border.class);
-        if(border != null){
+        Actor tree = getOneIntersectingObject(Tree.class);
+        if(border != null || tree != null){
             if (Greenfoot.isKeyDown("w")) {
                 setLocation(getX(), getY() + 2); // Nega o movimento pra cima
             }
