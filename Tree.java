@@ -25,6 +25,7 @@ public class Tree extends Actor
             decreaseLife();
         } else {
             MyWorld myWorld = (MyWorld)getWorld();
+            myWorld.addObject(new Log(), getX(), getY());
             myWorld.removeObject(this);
         }
     }
@@ -45,9 +46,15 @@ public class Tree extends Actor
         if(Greenfoot.mouseClicked(this)){
             Explorer explorer = (Explorer) getWorld().getObjects(Explorer.class).get(0);
             double distance = Math.sqrt(Math.pow(explorer.getX() - getX(), 2) + Math.pow(explorer.getY() - getY(), 2));
-            if(distance < 200){
+            if(distance < 50){
                 life -= explorer.getDamageCapability();
-                Greenfoot.delay(20);
+                if(life < 100 && life > 50){
+                    setImage("treeDamaged75.png");
+                } else if (life < 75 && life > 25){
+                    setImage("treeDamaged50.png");
+                } else if(life < 50 && life > 0){
+                    setImage("treeDamaged25.png");
+                }
             }
         }
     }
