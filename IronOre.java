@@ -18,7 +18,7 @@ public class IronOre extends Actor
             // Aumenta a quantidade de Bronze no Inventory
             Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
             if (inventory != null) {
-                inventory.takeItenIronOre();
+                inventory.takeItenIronOre(1);
             }
 
             // Remove este objeto do mundo

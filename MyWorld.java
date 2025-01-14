@@ -68,6 +68,9 @@ public class MyWorld extends World {
         Inventory inventory = new Inventory();
         addObject(inventory, getWidth() / 2, getHeight() / 2);
         
+        MarketHUD markethud = new MarketHUD();
+        addObject(markethud, getWidth() / 2, getHeight() / 2);
+        
         HUDCoins hud = new HUDCoins();
         addObject(hud, 50, 20);
     }

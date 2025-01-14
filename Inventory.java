@@ -7,17 +7,17 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Inventory extends Actor {
-    private int log;
-    private int stone;
-    private int copper;
-    private int copperOre;
-    private int tin;
-    private int tinOre;
-    private int bronze;
-    private int iron;
-    private int ironOre;
-    private int gold;
-    private int goldOre;
+    private static int log;
+    private static int stone;
+    private static int copper;
+    private static int copperOre;
+    private static int tin;
+    private static int tinOre;
+    private static int bronze;
+    private static int iron;
+    private static int ironOre;
+    private static int gold;
+    private static int goldOre;
     private boolean hudVisible;
 
     /**
@@ -44,7 +44,8 @@ public class Inventory extends Actor {
         ironOre = 0;
         goldOre = 0;
         gold = 0;
-        hudVisible = true;
+        hudVisible = false;
+        setImage((GreenfootImage) null); // Inicia com o HUD oculto
     }
 
     public void setImageInitial() {
@@ -102,7 +103,7 @@ public class Inventory extends Actor {
         imagem.drawImage(textoIron, 200, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Gold Ore
-        GreenfootImage textoGoldOre = new GreenfootImage("Ouro: " + goldOre, 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage textoGoldOre = new GreenfootImage("MOuro: " + goldOre, 15, Color.WHITE, new Color(0, 0, 0, 0));
         imagem.drawImage(textoGoldOre, 260, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Gold
@@ -128,48 +129,91 @@ public class Inventory extends Actor {
         }
     }
 
-    public void takeItenLog() {
-        log++;
+    public static void takeItenLog(int quantidade) {
+        log += quantidade;
     }
-
-    public void takeItenStone() {
-        stone++;
+    
+    public static int getLog(){
+        return log;
     }
-
-    public void takeItenCopperOre() {
-        copperOre++;
+    
+    public static void takeItenStone(int quantidade) {
+        stone += quantidade;
     }
-
-    public void takeItenCopper() {
-        copper++;
+    
+    public static int getStone(){
+        return stone;
     }
-
-    public void takeItenTinOre() {
-        tinOre++;
+    
+    public static void takeItenCopperOre(int quantidade) {
+        copperOre += quantidade;
     }
-
-    public void takeItenTin() {
-        tin++;
+    
+    public static int getCopperOre(){
+        return copperOre;
     }
-
-    public void takeItenBronze() {
-        bronze++;
+    
+    public static void takeItenCopper(int quantidade) {
+        copper += quantidade;
     }
-
-    public void takeItenIronOre() {
-        ironOre++;
+    
+    public static int getCopper(){
+        return copper;
     }
-
-    public void takeItenIron() {
-        iron++;
+    
+    public static void takeItenTinOre(int quantidade) {
+        tinOre += quantidade;
     }
-
-    public void takeItenGoldOre() {
-        goldOre++;
+    
+    public static int getTinOre(){
+        return tinOre;
     }
-
-    public void takeItenGold() {
-        gold++;
+    
+    public static void takeItenTin(int quantidade) {
+        tin += quantidade;
     }
-
+    
+    public static int getTin(){
+        return tin;
+    }
+    
+    public static void takeItenBronze(int quantidade) {
+        bronze += quantidade;
+    }
+    
+    public static int getBronze(){
+        return bronze;
+    }
+    
+    public static void takeItenIronOre(int quantidade) {
+        ironOre += quantidade;
+    }
+    
+    public static int getIronOre(){
+        return ironOre;
+    }
+    
+    public static void takeItenIron(int quantidade) {
+        iron += quantidade;
+    }
+    
+    public static int getIron(){
+        return iron;
+    }
+    
+    public static void takeItenGoldOre(int quantidade) {
+        goldOre += quantidade;
+    }
+    
+    public static int getGoldOre(){
+        return goldOre;
+    }
+    
+    public static void takeItenGold(int quantidade) {
+        gold += quantidade;
+    }
+    
+    public static int getGold(){
+        return gold;
+    }
 }

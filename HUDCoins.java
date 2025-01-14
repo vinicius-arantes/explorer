@@ -72,7 +72,7 @@ public class HUDCoins extends Actor
         return coin;
     }
     
-    public void setCoin(int adicionar)
+    public static void setCoin(int adicionar)
     {
         coin += adicionar;
     }
