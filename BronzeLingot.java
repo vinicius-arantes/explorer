@@ -18,7 +18,7 @@ public class BronzeLingot extends Actor
             // Aumenta a quantidade de Bronze no Inventory
             Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
             if (inventory != null) {
-                inventory.takeItenBronze();
+                inventory.takeItenBronze(1);
             }
 
             // Remove este objeto do mundo

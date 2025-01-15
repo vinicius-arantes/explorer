@@ -18,7 +18,7 @@ public class Log extends Actor
             // Aumenta a quantidade de Log no Inventory
             Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
             if (inventory != null) {
-                inventory.takeItenLog();
+                inventory.takeItenLog(1);
             }
 
             // Remove este objeto do mundo

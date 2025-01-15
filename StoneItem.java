@@ -18,7 +18,7 @@ public class StoneItem extends Actor
             // Aumenta a quantidade de Bronze no Inventory
             Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
             if (inventory != null) {
-                inventory.takeItenStone();
+                inventory.takeItenStone(1);
             }
 
             // Remove este objeto do mundo

@@ -8,12 +8,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Market extends Actor
 {
-    /**
-     * Act - do whatever the Market wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    private boolean wasTouching = false;
+    private static boolean openMarket = false;
+    
+    public void act() {
+        boolean isCurrentlyTouching = isTouching(Explorer.class);
+        if (isCurrentlyTouching && !wasTouching) {
+            openMarket = true;
+        } else if (!isCurrentlyTouching && wasTouching) {
+            openMarket = false;
+        }
+        wasTouching = isCurrentlyTouching;
+    }
+    
+    public static boolean getOpenMarket(){
+        return openMarket;
     }
 }
