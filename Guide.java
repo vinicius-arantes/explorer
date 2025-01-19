@@ -8,11 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Guide extends Actor
 {
-    private boolean visible;
     private int page;
     
     public Guide(){
-        visible = true;
         page = 1;
     }
     
@@ -22,22 +20,18 @@ public class Guide extends Actor
      */
     public void act()
     {
-        if (Greenfoot.isKeyDown("h") && !visible) {
-            getImage().setTransparency(240);
-            visible = true;
-        } else if(Greenfoot.isKeyDown("escape") && visible){
-            getImage().setTransparency(0);
-            visible = false;
+        if(Greenfoot.isKeyDown("escape")){
+            getWorld().removeObject(this);
         }
         changePage();
     }
     
     public void changePage(){
-        if(Greenfoot.isKeyDown("right") && visible && page != 9){
+        if(Greenfoot.isKeyDown("right") && page != 9){
             page++;
             setImage("guia" + page + ".png");
             Greenfoot.delay(10);
-        } else if(Greenfoot.isKeyDown("left") && visible && page != 1){
+        } else if(Greenfoot.isKeyDown("left") && page != 1){
             page--;
             setImage("guia" + page + ".png");
             Greenfoot.delay(10);

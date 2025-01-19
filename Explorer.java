@@ -22,6 +22,17 @@ public class Explorer extends Actor
     {
         movimentar();
         colisions();
+        openGuide();
+    }
+    
+    public void openGuide(){
+        if(Greenfoot.isKeyDown("h")){
+            List<Guide> guide = getWorld().getObjects(Guide.class);
+            if(guide.isEmpty()){
+                Guide guia = new Guide();
+                getWorld().addObject(guia, 600, 375);
+            }
+        }
     }
     
     public void movimentar() {

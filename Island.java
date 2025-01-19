@@ -53,6 +53,7 @@ public class Island extends Actor
         } else if(biomeType.contains("heaven")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
+            setImage("heavenIsland.png");
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
@@ -126,14 +127,16 @@ public class Island extends Actor
     }
     
     public void buyIsland(){
-        if(Greenfoot.mouseClicked(this)){    
-            setVisibility();
-            GreenfootImage image = getImage();
-            image.setTransparency(255);
-            setImage(image);
-            
-            MyWorld myWorld = (MyWorld)getWorld();
-            myWorld.removeBorders(this.getName());
+        if(Greenfoot.mouseClicked(this)){
+            MyWorld myWorld = (MyWorld) getWorld();
+            if(myWorld.canBeVisualized(this)){
+                setVisibility();
+                GreenfootImage image = getImage();
+                image.setTransparency(255);
+                setImage(image);
+                
+                myWorld.removeBorders(this.getName());
+            }
         }
     }
     
