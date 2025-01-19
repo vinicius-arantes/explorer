@@ -71,6 +71,9 @@ public class MyWorld extends World {
         MarketHUD markethud = new MarketHUD();
         addObject(markethud, getWidth() / 2, getHeight() / 2);
         
+        Guide guide = new Guide();
+        addObject(guide, 600, 350);
+        
         HUDCoins hud = new HUDCoins();
         addObject(hud, 50, 20);
     }

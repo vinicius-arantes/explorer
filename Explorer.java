@@ -26,17 +26,17 @@ public class Explorer extends Actor
     
     public void movimentar() {
         // Movimento com as setas do teclado
-        if (Greenfoot.isKeyDown("w")) {
+        if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) {
             setLocation(getX(), getY() - 2); // Move para cima
         }
-        if (Greenfoot.isKeyDown("s")) {
+        if (Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) {
             setLocation(getX(), getY() + 2); // Move para baixo
         }
-        if (Greenfoot.isKeyDown("a")) {
+        if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left")) {
             setLocation(getX() - 2, getY()); // Move para a esquerda
             setImage("mainCharac.png");
         }
-        if (Greenfoot.isKeyDown("d")) {
+        if (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right")) {
             setLocation(getX() + 2, getY()); // Move para a direita
             setImage("mainCharacRight.png");
         }
@@ -44,16 +44,16 @@ public class Explorer extends Actor
     
     public void colisions(){
         if(haveIntersectingObjects()){
-            if (Greenfoot.isKeyDown("w")) {
+            if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) {
                 setLocation(getX(), getY() + 2); // Nega o movimento pra cima
             }
-            if (Greenfoot.isKeyDown("s")) {
+            if (Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) {
                 setLocation(getX(), getY() - 2); // Nega o movimento pra baixo
             }
-            if (Greenfoot.isKeyDown("a")) {
+            if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left")) {
                 setLocation(getX() + 2, getY()); // Nega o movimento pra esquerda
             }
-            if (Greenfoot.isKeyDown("d")) {
+            if (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right")) {
                 setLocation(getX() - 2, getY()); // Nega o movimento pra direita
             }
         }
