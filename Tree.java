@@ -40,6 +40,9 @@ public class Tree extends Actor
         }else if(biomeType.contains("desert")){
             this.biomeType = biomeType;
             setImage("Cactus.png");
+        }else if(biomeType.contains("graveyard")){
+            this.biomeType = biomeType;
+            setImage("graveyardTree.png");
         }
     }
     

@@ -21,6 +21,7 @@ public class Island extends Actor
         visible = false;
         prepareBiomes(biomeName, biomeType);
         treeTimeCounting = 0;
+        stoneTimeCounting = 0;
         treeCounting = 0;
         stoneCounting = 0;
     }
@@ -58,6 +59,7 @@ public class Island extends Actor
         } else if(biomeType.contains("graveyard")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
+            setImage("graveyardBiome.png");
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
