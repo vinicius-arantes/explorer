@@ -71,6 +71,12 @@ public class MyWorld extends World {
         MarketHUD markethud = new MarketHUD();
         addObject(markethud, getWidth() / 2, getHeight() / 2);
         
+        FurnaceHUD furnacehud = new FurnaceHUD();
+        addObject(furnacehud, getWidth() / 2, getHeight() / 2);
+        
+        SkillTree skilltree = new SkillTree();
+        addObject(skilltree, getWidth() / 2, getHeight() / 2);
+        
         Guide guide = new Guide();
         addObject(guide, 600, 350);
         

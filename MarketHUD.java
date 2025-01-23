@@ -29,7 +29,7 @@ public class MarketHUD extends Actor {
 
     public void setImageInitial() {
         // Cria o HUD
-        GreenfootImage imagem = new GreenfootImage("HUD.png");
+        GreenfootImage imagem = new GreenfootImage("inventory.png");
         // Aplicamos transparencia no HUD
         imagem.setTransparency(240);
         // Aplica a imagem
@@ -40,7 +40,7 @@ public class MarketHUD extends Actor {
 
     public void updateHUD() {
         // Cria a imagem base do HUD
-        GreenfootImage imagem = new GreenfootImage("HUD.png");
+        GreenfootImage imagem = new GreenfootImage("inventory.png");
 
         // Adiciona a imagem do slot selecionado
         String selectedImageName = "selected-" + selected + ".png";
@@ -84,12 +84,16 @@ public class MarketHUD extends Actor {
         imagem.drawImage(textoIron, 200, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Gold Ore
-        GreenfootImage textoGoldOre = new GreenfootImage("Ouro: " + Inventory.getGoldOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage textoGoldOre = new GreenfootImage("MOuro: " + Inventory.getGoldOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
         imagem.drawImage(textoGoldOre, 260, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Gold
         GreenfootImage textoGold = new GreenfootImage("Ouro: " + Inventory.getGold(), 15, Color.WHITE, new Color(0, 0, 0, 0));
         imagem.drawImage(textoGold, 320, 160); // Posiciona o texto no HUD
+        
+        // Adiciona o texto do número de Couro
+        GreenfootImage textoLeather = new GreenfootImage("Couro: " + Inventory.getLeather(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoLeather, 380, 160); // Posiciona o texto no HUD
 
         // Define a nova imagem com tudo desenhado
         setImage(imagem);
@@ -202,6 +206,12 @@ public class MarketHUD extends Actor {
             if (selected == 11 && Inventory.getGold() > 0){
                 Inventory.takeItenGold(-1);
                 HUDCoins.setCoin(250);
+                Greenfoot.delay(10);
+            }
+            
+            if (selected == 12 && Inventory.getLeather() > 0){
+                Inventory.takeItenLeather(-1);
+                HUDCoins.setCoin(100);
                 Greenfoot.delay(10);
             }
         }
