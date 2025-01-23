@@ -8,12 +8,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Furnace extends Actor
 {
-    /**
-     * Act - do whatever the Furnace wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    private boolean wasTouching = false;
+    private static boolean openFurnace = false;
+    
+    public void act() {
+        boolean isCurrentlyTouching = isTouching(Explorer.class);
+        if (isCurrentlyTouching && !wasTouching) {
+            openFurnace = true;
+        } else if (!isCurrentlyTouching && wasTouching) {
+            openFurnace = false;
+        }
+        wasTouching = isCurrentlyTouching;
+    }
+    
+    public static boolean getOpenFurnace(){
+        return openFurnace;
     }
 }

@@ -18,6 +18,7 @@ public class Inventory extends Actor {
     private static int ironOre;
     private static int gold;
     private static int goldOre;
+    private static int leather;
     private boolean hudVisible;
 
     /**
@@ -44,13 +45,14 @@ public class Inventory extends Actor {
         ironOre = 0;
         goldOre = 0;
         gold = 0;
+        leather = 0;
         hudVisible = false;
         setImage((GreenfootImage) null); // Inicia com o HUD oculto
     }
 
     public void setImageInitial() {
         // Cria o HUD
-        GreenfootImage imagem = new GreenfootImage("HUD.png");
+        GreenfootImage imagem = new GreenfootImage("inventory.png");
         // Aplicamos transparencia no HUD
         imagem.setTransparency(240);
         // Aplica a imagem
@@ -61,7 +63,7 @@ public class Inventory extends Actor {
 
     public void updateHUD() {
         // Cria a imagem do HUD
-        GreenfootImage imagem = new GreenfootImage("HUD.png");
+        GreenfootImage imagem = new GreenfootImage("inventory.png");
         // Aplicamos transparencia no HUD
         imagem.setTransparency(240);
 
@@ -110,6 +112,10 @@ public class Inventory extends Actor {
         GreenfootImage textoGold = new GreenfootImage("Ouro: " + gold, 15, Color.WHITE, new Color(0, 0, 0, 0));
         imagem.drawImage(textoGold, 320, 160); // Posiciona o texto no HUD
 
+        // Adiciona o texto do número de Couro
+        GreenfootImage textoLeather = new GreenfootImage("Couro: " + leather, 15, Color.WHITE, new Color(0, 0, 0, 0));
+        imagem.drawImage(textoLeather, 380, 160); // Posiciona o texto no HUD
+        
         // Define a nova imagem
         setImage(imagem);
     }
@@ -215,5 +221,13 @@ public class Inventory extends Actor {
     
     public static int getGold(){
         return gold;
+    }
+    
+    public static void takeItenLeather(int quantidade){
+        leather += quantidade;
+    }
+    
+    public static int getLeather(){
+        return leather;
     }
 }
