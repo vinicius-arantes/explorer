@@ -23,7 +23,7 @@ public class Explorer extends Actor
         xpIncrease = 1;
         xpDificult = 0;
         xpLevel = 1;
-        xpPoint = 0;
+        xpPoint = 30;
         pickaxeLevel = 1;
         backpackLevel = 0;
     }
@@ -126,13 +126,18 @@ public class Explorer extends Actor
             else{
                 xpDificult += 100;
             }
-            
-            if(xpLevel == 5){
-                getWorld().addObject(new Merchant(), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
-            }
             xp = 0;
         }
     }
+    
+    public static int getXpPoint(){
+        return xpPoint;
+    }
+    
+    public static void setXpPoint(){
+        xpPoint -= 1;
+    }
+    
     
     public void upgradePickaxe(){
         pickaxeLevel++;
