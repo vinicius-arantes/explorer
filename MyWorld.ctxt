@@ -16,4 +16,6 @@ comment6.params=island
 comment6.target=boolean\ canBeVisualized(Island)
 comment7.params=biomeName
 comment7.target=void\ removeBorders(java.lang.String)
-numComments=8
+comment8.params=islandName
+comment8.target=Island\ getIsland(java.lang.String)
+numComments=9

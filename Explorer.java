@@ -14,6 +14,8 @@ public class Explorer extends Actor
     private static int xpDificult;
     private static int xpLevel;
     private static int xpPoint;
+    private int pickaxeLevel;
+    private int backpackLevel;
     
     public Explorer(){
         damageCapability = 25;
@@ -22,6 +24,8 @@ public class Explorer extends Actor
         xpDificult = 0;
         xpLevel = 1;
         xpPoint = 0;
+        pickaxeLevel = 1;
+        backpackLevel = 0;
     }
     
     /**
@@ -122,6 +126,20 @@ public class Explorer extends Actor
             else{
                 xpDificult += 100;
             }
+            
+            if(xpLevel == 5){
+                getWorld().addObject(new Merchant(), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+            }
+            xp = 0;
         }
+    }
+    
+    public void upgradePickaxe(){
+        pickaxeLevel++;
+        damageCapability += 25;
+    }
+    
+    public void upgradeBackpack(){
+        backpackLevel++;
     }
 }

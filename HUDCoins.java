@@ -67,7 +67,7 @@ public class HUDCoins extends Actor
         setImage(fundoHUD);
     }
     
-    public int getCoin()
+    public static int getCoin()
     {
         return coin;
     }
@@ -75,6 +75,9 @@ public class HUDCoins extends Actor
     public static void setCoin(int adicionar)
     {
         coin += adicionar;
+        if(coin < 0){
+            coin = 0;
+        }
     }
     
 }

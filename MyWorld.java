@@ -23,40 +23,40 @@ public class MyWorld extends World {
     }
 
     public void prepare() {
-        Island tundra2 = new Island("tundra2", "tundra");
+        Island tundra2 = new Island("tundra2", "tundra", 4500);
         addObject(tundra2, 200, 125);
         islandsMap.put(tundra2.getName(), tundra2);
         
-        Island desert = new Island("desert1", "desert");
+        Island desert = new Island("desert1", "desert", 600);
         addObject(desert, 200, 375);
         islandsMap.put(desert.getName(), desert);
 
-        Island heaven = new Island("heaven1", "heaven");
+        Island heaven = new Island("heaven1", "heaven", 12000);
         addObject(heaven, 600, 125);
         islandsMap.put(heaven.getName(), heaven);
         
-        Island island = new Island("mainOverworld", "mainOverworld");
+        Island island = new Island("mainOverworld", "mainOverworld", 0);
         island.setVisibility();
         addObject(island, 600, 375);
         islandsMap.put(island.getName(), island);
 
-        Island graveyard2 = new Island("graveyard2", "graveyard");
+        Island graveyard2 = new Island("graveyard2", "graveyard", 10000);
         addObject(graveyard2, 1000, 125);
         islandsMap.put(graveyard2.getName(), graveyard2);
         
-        Island tundra = new Island("tundra1", "tundra");
+        Island tundra = new Island("tundra1", "tundra", 3000);
         addObject(tundra, 1000, 375);
         islandsMap.put(tundra.getName(), tundra);
         
-        Island overworld = new Island("overworld", "overworld");
+        Island overworld = new Island("overworld", "overworld", 2150);
         addObject(overworld, 200, 625);
         islandsMap.put(overworld.getName(), overworld);
         
-        Island graveyard = new Island("graveyard1", "graveyard");
+        Island graveyard = new Island("graveyard1", "graveyard", 8000);
         addObject(graveyard, 600, 625);
         islandsMap.put(graveyard.getName(), graveyard);
         
-        Island desert2 = new Island("desert2", "desert");
+        Island desert2 = new Island("desert2", "desert", 4500);
         addObject(desert2, 1000, 625);
         islandsMap.put(desert2.getName(), desert2);
         
@@ -67,6 +67,9 @@ public class MyWorld extends World {
         
         Inventory inventory = new Inventory();
         addObject(inventory, getWidth() / 2, getHeight() / 2);
+        
+        Market market = new Market();
+        addObject(market, 420, 255);
         
         MarketHUD markethud = new MarketHUD();
         addObject(markethud, getWidth() / 2, getHeight() / 2);
@@ -214,6 +217,10 @@ public class MyWorld extends World {
                 removeObject(border);
             }
         }
+    }
+    
+    public Island getIsland(String islandName){
+        return islandsMap.get(islandName);
     }
     
 }

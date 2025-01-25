@@ -11,31 +11,61 @@ public class Island extends Actor
 {
     private String biomeName = "overworld";
     private String biomeType = "overworld";
+    private int price;
     private boolean visible;
-    private int treeTimeCounting;
-    private int stoneTimeCounting;
-    private int treeCounting;
-    private int stoneCounting;
     
-    public Island(String biomeName, String biomeType){
+    private int treeTimeCounting;
+    private int treeDelaySpawning;
+    private int treeCounting;
+    private int maxTrees;
+    
+    private int stoneCounting;
+    private int stoneTimeCounting;
+    private int stoneDelaySpawning;
+    private int maxStones;
+    
+    private int cowCounting;
+    private int cowTimeCounting;
+    private int cowDelaySpawning;
+    private int maxCows;
+    
+    public Island(String biomeName, String biomeType, int price){
         visible = false;
         prepareBiomes(biomeName, biomeType);
-        treeTimeCounting = 0;
-        stoneTimeCounting = 0;
+        this.price = price;
+        
+        treeTimeCounting = Greenfoot.getRandomNumber(500);
         treeCounting = 0;
+        
+        stoneTimeCounting = Greenfoot.getRandomNumber(500);
         stoneCounting = 0;
+        
+        cowTimeCounting = Greenfoot.getRandomNumber(500);
+        cowCounting = 0;
     }
     
     public void prepareBiomes(String biomeName, String biomeType){
         if(biomeType.contains("mainOverworld")){
             this.biomeName = biomeName;
             this.biomeType = biomeType;
+            maxTrees = 6;
+            maxStones = 6;
+            maxCows = 3;
+            treeDelaySpawning = 2000;
+            stoneDelaySpawning = 2543;
+            cowDelaySpawning = 5500;
         }else if(biomeType.contains("overworld")){
             this.biomeName = biomeName;
             this.biomeType = biomeType;
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
+            maxTrees = 5;
+            maxStones = 4;
+            maxCows = 4;
+            treeDelaySpawning = 2000;
+            stoneDelaySpawning = 2543;
+            cowDelaySpawning = 5500;
         } else if(biomeType.contains("tundra")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
@@ -43,6 +73,12 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
+            maxTrees = 8;
+            maxStones = 4;
+            maxCows = 1;
+            treeDelaySpawning = 2600;
+            stoneDelaySpawning = 3143;
+            cowDelaySpawning = 10500;
         } else if(biomeType.contains("desert")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
@@ -50,6 +86,12 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
+            maxTrees = 10;
+            maxStones = 0;
+            maxCows = 0;
+            treeDelaySpawning = 2200;
+            stoneDelaySpawning = 10000;
+            cowDelaySpawning = 10000;
         } else if(biomeType.contains("heaven")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
@@ -57,6 +99,12 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
+            maxTrees = 11;
+            maxStones = 0;
+            maxCows = 2;
+            treeDelaySpawning = 3000;
+            stoneDelaySpawning = 10543;
+            cowDelaySpawning = 10500;
         } else if(biomeType.contains("graveyard")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
@@ -64,6 +112,12 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
+            maxTrees = 4;
+            maxStones = 8;
+            maxCows = 0;
+            treeDelaySpawning = 3500;
+            stoneDelaySpawning = 2943;
+            cowDelaySpawning = 5500;
         }
         
         if(biomeName.contains("mainOverworld")){
@@ -77,16 +131,19 @@ public class Island extends Actor
      */
     public void act()
     {
-        if(isVisible() && treeCounting != 10){
+        if(isVisible() && treeCounting != maxTrees){
             treeTimeCounting++;
         }
-        if(isVisible() && stoneCounting != 8){
+        if(isVisible() && stoneCounting != maxStones){
             stoneTimeCounting++;
+        }
+        if(isVisible() && cowCounting != maxCows){
+            cowTimeCounting++;
         }
         if (Greenfoot.isKeyDown("m")){
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.showIslands();
-            buyIsland();
+            callBuyIsland();
         } else {
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.hideIslands();
@@ -126,18 +183,34 @@ public class Island extends Actor
         stoneCounting += valueChange;
     }
     
-    public void buyIsland(){
-        if(Greenfoot.mouseClicked(this)){
-            MyWorld myWorld = (MyWorld) getWorld();
-            if(myWorld.canBeVisualized(this)){
-                setVisibility();
-                GreenfootImage image = getImage();
-                image.setTransparency(255);
-                setImage(image);
-                
-                myWorld.removeBorders(this.getName());
+    public int getCowCounting(){
+        return cowCounting;
+    }
+    
+    public void setCowCounting(int valueChange){
+        cowCounting += valueChange;
+    }
+    
+    public void callBuyIsland(){
+        MyWorld myWorld = (MyWorld) getWorld();
+        if(Greenfoot.mouseClicked(this) && myWorld.canBeVisualized(this)){
+            if(HUDCoins.getCoin() >= price){
+                myWorld.addObject(new Warning("buyIsland", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+            } else {
+                myWorld.addObject(new Warning("notEnoughCoins", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
             }
         }
+    }
+    
+    public void buyIsland(){
+        MyWorld myWorld = (MyWorld) getWorld();
+        
+        setVisibility();
+        GreenfootImage image = getImage();
+        image.setTransparency(255);
+        setImage(image);
+        myWorld.removeBorders(getName());
+        HUDCoins.setCoin(-price);
     }
     
     public boolean haveObjectsAtTheseCords(int x, int y){
@@ -155,16 +228,22 @@ public class Island extends Actor
         MyWorld myWorld = (MyWorld)getWorld();
         int x = Greenfoot.getRandomNumber((getX() + 180) - (getX() - 200) + 1) + (getX() - 200);
         int y = Greenfoot.getRandomNumber((getY() + 97) - (getY() - 125) + 1) + (getY() - 125);
-        if(isVisible() && treeTimeCounting >= 1000 && treeCounting <= 10 && !haveObjectsAtTheseCords(x, y)){
+        if(isVisible() && treeTimeCounting >= treeDelaySpawning && treeCounting <= maxTrees && !haveObjectsAtTheseCords(x, y)){
             myWorld.addObject(new Tree(getType()), x, y);
             treeTimeCounting = 0;
             treeCounting++;
         }
         
-        if(isVisible() && stoneTimeCounting >= 1343 && stoneCounting <= 8 && !haveObjectsAtTheseCords(x, y)){
+        if(isVisible() && stoneTimeCounting >= stoneDelaySpawning && stoneCounting <= maxStones && !haveObjectsAtTheseCords(x, y)){
             myWorld.addObject(new Stone(getType()), x, y);
             stoneTimeCounting = 0;
             stoneCounting++;
+        }
+        
+        if(isVisible() && cowTimeCounting >= cowDelaySpawning && cowCounting <= maxCows && !haveObjectsAtTheseCords(x, y)){
+            myWorld.addObject(new Cow(this), x, y);
+            cowTimeCounting = 0;
+            cowCounting++;
         }
     }
 }
