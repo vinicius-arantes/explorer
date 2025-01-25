@@ -20,7 +20,7 @@ public class Log extends Actor
             if (inventory != null) {
                 inventory.takeItenLog(1);
             }
-
+            
             // Remove este objeto do mundo
             getWorld().removeObject(this);
         }

@@ -87,8 +87,6 @@ public class Island extends Actor
             maxIrons = 0;
             maxCoppers = 0;
             maxTins = 0;
-            //treeDelaySpawning = 2000;
-            //stoneDelaySpawning = 2543;
             treeDelaySpawning = 2000;
             stoneDelaySpawning = 2543;
             cowDelaySpawning = 5500;
@@ -200,7 +198,28 @@ public class Island extends Actor
             ironDelaySpawning = 6000;
             copperDelaySpawning = 4500;
             tinDelaySpawning = 4500;
-        }
+        } else if(biomeType.contains("endPortal")) {
+            this.biomeName = biomeName;
+            this.biomeType = biomeType;
+            setImage("tundraBiome.png");
+            GreenfootImage image = getImage();
+            image.setTransparency(0);
+            setImage(image);
+            maxTrees = 0;
+            maxStones = 0;
+            maxCows = 0;
+            maxGolds = 0;
+            maxIrons = 0;
+            maxCoppers = 0;
+            maxTins = 0;
+            treeDelaySpawning = 2600;
+            stoneDelaySpawning = 3143;
+            cowDelaySpawning = 10500;
+            goldDelaySpawning = 20000;
+            ironDelaySpawning = 6000;
+            copperDelaySpawning = 4500;
+            tinDelaySpawning = 4500;
+        } 
         
         if(biomeName.contains("mainOverworld")){
             visible = true;
@@ -272,6 +291,22 @@ public class Island extends Actor
     
     public int getStoneCounting(){
         return stoneCounting;
+    }
+    
+    public void setGoldCounting(int valueChange){
+        goldCounting += valueChange;
+    }
+    
+    public void setIronCounting(int valueChange){
+        ironCounting += valueChange;
+    }
+    
+    public void setCopperCounting(int valueChange){
+        copperCounting += valueChange;
+    }
+    
+    public void setTinCounting(int valueChange){
+        tinCounting += valueChange;
     }
     
     public void setStoneCounting(int valueChange){

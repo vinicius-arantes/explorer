@@ -6,23 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class CopperOre extends Actor
+public class CopperOre extends Ore
 {
-    /**
-     * Act - do whatever the CopperOre wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        if (isTouching(Explorer.class)) {
-            // Aumenta a quantidade de Bronze no Inventory
-            Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
-            if (inventory != null) {
-                inventory.takeItenCopperOre(1);
-            }
-
-            // Remove este objeto do mundo
-            getWorld().removeObject(this);
-        }
+    public CopperOre(){
+        super(200, "copper");
     }
 }

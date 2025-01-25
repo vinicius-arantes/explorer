@@ -60,6 +60,10 @@ public class MyWorld extends World {
         addObject(desert2, 1000, 625);
         islandsMap.put(desert2.getName(), desert2);
         
+        Island endPortal = new Island("endPortal", "endPortal", 28000);
+        addObject(endPortal, 600, 50);
+        islandsMap.put(endPortal.getName(), endPortal);
+        
         setBorders();
         
         Explorer explorer = new Explorer();
@@ -79,6 +83,16 @@ public class MyWorld extends World {
         
         SkillTree skilltree = new SkillTree();
         addObject(skilltree, getWidth() / 2, getHeight() / 2);
+        
+        GoldOre goldOre = new GoldOre();
+        addObject(goldOre, 480, 255);
+        TinOre tinOre = new TinOre();
+        addObject(tinOre, 500, 255);
+        IronOre ironOre = new IronOre();
+        addObject(ironOre, 460, 255);
+        CopperOre copperOre = new CopperOre();
+        addObject(copperOre, 540, 255);
+        
         
         Guide guide = new Guide();
         addObject(guide, 600, 350);
@@ -211,6 +225,10 @@ public class MyWorld extends World {
             }
         } else if (islandName == "desert2"){
             if(!islandsMap.get("graveyard1").isVisible() && !islandsMap.get("tundra1").isVisible()){
+                return false;
+            }
+        } else if (islandName == "endPortal"){
+            if(!islandsMap.get("heaven1").isVisible()){
                 return false;
             }
         }

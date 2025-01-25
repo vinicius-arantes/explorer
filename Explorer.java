@@ -9,6 +9,7 @@ import java.util.List;
 public class Explorer extends Actor
 {
     private int damageCapability;
+    private int life;
     private static int xp;
     private static int xpIncrease;
     private static int xpDificult;
@@ -19,6 +20,7 @@ public class Explorer extends Actor
     
     public Explorer(){
         damageCapability = 25;
+        life = 100;
         xp = 0;
         xpIncrease = 1;
         xpDificult = 0;
@@ -89,7 +91,8 @@ public class Explorer extends Actor
         Actor border = getOneIntersectingObject(Border.class);
         Actor tree = getOneIntersectingObject(Tree.class);
         Actor stone = getOneIntersectingObject(Stone.class);
-        if(border != null || tree != null || stone != null){
+        Actor ore = getOneIntersectingObject(Ore.class);
+        if(border != null || tree != null || stone != null || ore != null){
             return true;
         }
         return false;
@@ -101,6 +104,7 @@ public class Explorer extends Actor
     
     public void gainXp(int quantidade){
         xp += quantidade * xpIncrease;
+        getWorld().getObjects(HUDXp.class).get(0).setAmount(xp);
     }
     
     public void gainXpIncrease(int quantidade){
@@ -108,7 +112,7 @@ public class Explorer extends Actor
     }
     
     public void upLevel(){
-        if( xp == 100 + xpDificult && xpLevel < 30){
+        if( xp >= 100 + xpDificult && xpLevel < 30){
             xpLevel++;
             xpPoint++;
             if(xpLevel > 20){
@@ -127,6 +131,9 @@ public class Explorer extends Actor
                 xpDificult += 100;
             }
             xp = 0;
+            MyWorld myWorld = (MyWorld) getWorld();
+            myWorld.getObjects(HUDXp.class).get(0).resetHud(xpDificult);
+            myWorld.addObject(new Warning("notEnoughCoins"), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
         }
     }
     
@@ -138,6 +145,10 @@ public class Explorer extends Actor
         xpPoint -= 1;
     }
     
+    public void changeLife(int quantidade){
+        life += quantidade;
+        getWorld().getObjects(HUDLife.class).get(0).setAmount(xp);
+    }
     
     public void upgradePickaxe(){
         pickaxeLevel++;
