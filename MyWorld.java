@@ -85,6 +85,12 @@ public class MyWorld extends World {
         
         HUDCoins hud = new HUDCoins();
         addObject(hud, 50, 20);
+        
+        HUDLife hudlife = new HUDLife(100);
+        addObject(hudlife, 70, 730);
+        
+        HUDXp hudxp = new HUDXp(0);
+        addObject(hudxp, 70, 700);
     }
     
     public void setBorders(){
