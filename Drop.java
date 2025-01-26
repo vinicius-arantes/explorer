@@ -31,6 +31,14 @@ public class Drop extends Actor
                     inventory.takeItenTinOre(1);
                 } else if(type.contains("gold")){
                     inventory.takeItenGoldOre(1);
+                } else if(type.contains("owOrb")){
+                    inventory.setOverworldOrb(1);
+                } else if(type.contains("tdOrb")){
+                    inventory.setTundraOrb(1);
+                } else if(type.contains("gyOrb")){
+                    inventory.setGraveyardOrb(1);
+                } else if(type.contains("deOrb")){
+                    inventory.setDesertOrb(1);
                 }
             }
 

@@ -19,11 +19,10 @@ public class Inventory extends Actor {
     private static int gold;
     private static int goldOre;
     private static int leather;
-    private static int iceHearth;
-    private static int scaldingSun;
-    private static int eternityOrb;
-    private static int darknessCrown;
-    private static int lifeTree;
+    private static int overworldOrb;
+    private static int desertOrb;
+    private static int tundraOrb;
+    private static int graveyardOrb;
     private boolean hudVisible;
 
     /**
@@ -51,11 +50,10 @@ public class Inventory extends Actor {
         goldOre = 0;
         gold = 0;
         leather = 0;
-        iceHearth = 0;
-        scaldingSun = 0;
-        eternityOrb = 0;
-        darknessCrown = 0;
-        lifeTree = 0;
+        overworldOrb = 0;
+        desertOrb = 0;
+        tundraOrb = 0;
+        graveyardOrb = 0;
         hudVisible = false;
         setImage((GreenfootImage) null); // Inicia com o HUD oculto
     }
@@ -148,6 +146,30 @@ public class Inventory extends Actor {
         GreenfootImage couroIcon = new GreenfootImage("leather.png");
         imagem.drawImage(couroIcon, 387, 145);
         imagem.drawImage(textoLeather, 407, 160); // Posiciona o texto no HUD
+        
+        // Adiciona o texto do número de OverworldOrb
+        GreenfootImage textoOverworldOrb = new GreenfootImage("" + overworldOrb, 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage overworldOrbIcon = new GreenfootImage("overworldOrb.png");
+        imagem.drawImage(overworldOrbIcon, 130, 217);
+        imagem.drawImage(textoOverworldOrb, 145, 230);
+        
+        // Adiciona o texto do número de DesertOrb
+        GreenfootImage textoDesertOrb = new GreenfootImage("" + desertOrb, 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage desertOrbIcon = new GreenfootImage("desertOrb.png");
+        imagem.drawImage(desertOrbIcon, 190, 217);
+        imagem.drawImage(textoDesertOrb, 205, 230);
+        
+        // Adiciona o texto do número de TundraOrb
+        GreenfootImage textoTundraOrb = new GreenfootImage("" + tundraOrb, 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage TundraOrbIcon = new GreenfootImage("tundraOrb.png");
+        imagem.drawImage(TundraOrbIcon, 245, 217);
+        imagem.drawImage(textoTundraOrb, 260, 230);
+        
+        // Adiciona o texto do número de GraveyardOrb
+        GreenfootImage textoGraveyardOrb = new GreenfootImage("" + graveyardOrb, 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage graveyardOrbIcon = new GreenfootImage("graveyardOrb.png");
+        imagem.drawImage(graveyardOrbIcon, 300, 217);
+        imagem.drawImage(textoGraveyardOrb, 315, 230);
         
         GreenfootImage xpLevel = new GreenfootImage("" + Explorer.getXpLevel(), 22, new Color(0x73, 0x3D, 0x26, 255) , new Color(0, 0, 0, 0));
         imagem.drawImage(xpLevel, 351, 264);
@@ -270,30 +292,36 @@ public class Inventory extends Actor {
         return leather;
     }
     
-    public static int geticeHearth(){
-        return iceHearth;
+    public static int getGraveyardOrb(){
+        return graveyardOrb;
     }
     
-    public static int getScaldingSun(){
-        return scaldingSun;
+    public static int getTundraOrb(){
+        return tundraOrb;
     }
     
-    public static int getEternityOrb(){
-        return eternityOrb;
+    public static int getDesertOrb(){
+        return desertOrb;
     }
     
-    public static int getDarknessCrown(){
-        return darknessCrown;
+    public static int getOverworldOrb(){
+        return overworldOrb;
     }
     
-    public static int getLifeTree(){
-        return lifeTree;
+    public static void setGraveyardOrb(int quantidade){
+        graveyardOrb += quantidade;
     }
     
-    public static boolean haveAllItensOpenEndPortal(){
-        if(iceHearth != 0 && scaldingSun != 0 && eternityOrb != 0 && darknessCrown != 0 && lifeTree != 0){
-            return true;
-        }
-        return false;
+    public static void setTundraOrb(int quantidade){
+        tundraOrb += quantidade;
     }
+    
+    public static void setDesertOrb(int quantidade){
+        desertOrb += quantidade;
+    }
+    
+    public static void setOverworldOrb(int quantidade){
+        overworldOrb += quantidade;
+    }
+
 }

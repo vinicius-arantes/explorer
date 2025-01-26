@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class MyWorld extends World {
     private HashMap<String, Island> islandsMap = new HashMap<>();
     private ArrayList<Border> bordersMap = new ArrayList();
+    private static ArrayList<Chalice> chalicesMap = new ArrayList();
 
     /**
      * Constructor for objects of class MyWorld.
@@ -65,6 +66,8 @@ public class MyWorld extends World {
         islandsMap.put(endPortal.getName(), endPortal);
         
         setBorders();
+        
+        setChalices();
         
         Explorer explorer = new Explorer();
         addObject(explorer, 600, 375);
@@ -189,6 +192,24 @@ public class MyWorld extends World {
         bordersMap.add(graveyard2ToTundra);
     }
     
+    public void setChalices(){
+        Chalice tundraChalice = new Chalice("tundra", 300);
+        addObject(tundraChalice, 1000, 375);
+        chalicesMap.add(tundraChalice);
+        
+        Chalice desertChalice = new Chalice("desert", 300);
+        addObject(desertChalice, 200, 375);
+        chalicesMap.add(desertChalice);
+        
+        Chalice overworldChalice = new Chalice("overworld", 300);
+        addObject(overworldChalice, 600, 375);
+        chalicesMap.add(overworldChalice);
+        
+        Chalice graveyardChalice = new Chalice("graveyard", 300);
+        addObject(graveyardChalice, 600, 625);
+        chalicesMap.add(graveyardChalice);
+    }
+    
     public void showIslands(){
         for(Island island : islandsMap.values()){
             if(!island.isVisible() && canBeVisualized(island)){
@@ -254,7 +275,31 @@ public class MyWorld extends World {
             image.setTransparency(255);
             island.setImage(image);
             removeBorders(island.getName());
+            MyWorld.showChalice(island.getType());
         }
     }
     
+    public static boolean haveAllChalicesFullfilled(){
+        int fullfilledAmount = 0;
+        for(Chalice chalice : chalicesMap){
+            if(chalice.isFull()){
+                fullfilledAmount++;
+            }
+        }
+        if(fullfilledAmount == 4){
+            return true;
+        }
+        return false;
+    }
+    
+    public static void showChalice(String chaliceName){
+        for(Chalice chalice : chalicesMap){
+            if(chalice.getType().contains(chaliceName)){
+                GreenfootImage image = chalice.getImage();
+                image.setTransparency(255);
+                chalice.setImage(image);
+                chalice.setVisibility();
+            }
+        }
+    }
 }
