@@ -32,7 +32,7 @@ public class Ore extends Actor
             if(type.contains("tree")){
                 getWorld().getObjectsAt(getX(), getY(), Island.class).get(0).setTreeCounting(-1);
                 myWorld.addObject(new Log(), getX()-5, getY());
-            } else if(type.contains("stone")){
+            } else if(type.contains("rock")){
                 getWorld().getObjectsAt(getX(), getY(), Island.class).get(0).setStoneCounting(-1);
                 myWorld.addObject(new StoneItem(), getX()-5, getY());
             } else if(type.contains("iron")){
@@ -59,11 +59,11 @@ public class Ore extends Actor
             if(distance < 50){
                 life -= explorer.getDamageCapability();
                 if(life < 100 && life > 50){
-                    //setImage(type + "Damaged75.png");
+                    setImage(type + "Damaged75.png");
                 } else if (life < 75 && life > 25){
-                    //setImage(type + "Damaged50.png");
+                    setImage(type + "Damaged50.png");
                 } else if(life < 50 && life > 0){
-                    //setImage(type + "Damaged25.png");
+                    setImage(type + "Damaged25.png");
                 }
             }
         }

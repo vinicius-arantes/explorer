@@ -86,12 +86,12 @@ public class MyWorld extends World {
         
         GoldOre goldOre = new GoldOre();
         addObject(goldOre, 480, 255);
-        TinOre tinOre = new TinOre();
-        addObject(tinOre, 500, 255);
-        IronOre ironOre = new IronOre();
-        addObject(ironOre, 460, 255);
-        CopperOre copperOre = new CopperOre();
-        addObject(copperOre, 540, 255);
+        GoldOre goldOre2 = new GoldOre();
+        addObject(goldOre2, 500, 255);
+        GoldOre goldOre3 = new GoldOre();
+        addObject(goldOre3, 460, 255);
+        GoldOre goldOre4 = new GoldOre();
+        addObject(goldOre4, 540, 255);
         
         
         Guide guide = new Guide();
@@ -245,6 +245,16 @@ public class MyWorld extends World {
     
     public Island getIsland(String islandName){
         return islandsMap.get(islandName);
+    }
+    
+    public void buyAllIslands(){
+        for(Island island : islandsMap.values()){
+            island.setVisibility();
+            GreenfootImage image = island.getImage();
+            image.setTransparency(255);
+            island.setImage(image);
+            removeBorders(island.getName());
+        }
     }
     
 }

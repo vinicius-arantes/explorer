@@ -49,6 +49,11 @@ public class Island extends Actor
     private int tinDelaySpawning;
     private int maxTins;
     
+    private int mobCounting;
+    private int mobTimeCounting;
+    private int mobDelaySpawning;
+    private int maxMobs;
+    
     public Island(String biomeName, String biomeType, int price){
         visible = false;
         prepareBiomes(biomeName, biomeType);
@@ -74,6 +79,9 @@ public class Island extends Actor
         
         tinTimeCounting = Greenfoot.getRandomNumber(500);
         tinCounting = 0;
+        
+        mobTimeCounting = Greenfoot.getRandomNumber(500);
+        mobCounting = 0;
     }
     
     public void prepareBiomes(String biomeName, String biomeType){
@@ -87,6 +95,8 @@ public class Island extends Actor
             maxIrons = -1;
             maxCoppers = -1;
             maxTins = -1;
+            maxMobs = -1;
+            mobDelaySpawning = 500;
             treeDelaySpawning = 2000;
             stoneDelaySpawning = 2543;
             cowDelaySpawning = 5500;
@@ -107,6 +117,8 @@ public class Island extends Actor
             maxIrons = -1;
             maxCoppers = -1;
             maxTins = -1;
+            maxMobs = -1;
+            mobDelaySpawning = 2500;
             treeDelaySpawning = 2000;
             stoneDelaySpawning = 2543;
             cowDelaySpawning = 5500;
@@ -128,6 +140,8 @@ public class Island extends Actor
             maxIrons = -1;
             maxCoppers = -1;
             maxTins = 0;
+            maxMobs = 2;
+            mobDelaySpawning = 2500;
             treeDelaySpawning = 2600;
             stoneDelaySpawning = 3143;
             cowDelaySpawning = 10500;
@@ -149,6 +163,8 @@ public class Island extends Actor
             maxIrons = -1;
             maxCoppers = 1;
             maxTins = -1;
+            maxMobs = 2;
+            mobDelaySpawning = 2500;
             treeDelaySpawning = 2200;
             stoneDelaySpawning = 10000;
             cowDelaySpawning = 10000;
@@ -170,6 +186,8 @@ public class Island extends Actor
             maxIrons = -1;
             maxCoppers = -1;
             maxTins = -1;
+            maxMobs = -1;
+            mobDelaySpawning = 2500;
             treeDelaySpawning = 3000;
             stoneDelaySpawning = 10543;
             cowDelaySpawning = 10500;
@@ -191,6 +209,8 @@ public class Island extends Actor
             maxIrons = -1;
             maxCoppers = -1;
             maxTins = -1;
+            maxMobs = 2;
+            mobDelaySpawning = 2500;
             treeDelaySpawning = 3500;
             stoneDelaySpawning = 2943;
             cowDelaySpawning = 5500;
@@ -212,6 +232,8 @@ public class Island extends Actor
             maxIrons = -1;
             maxCoppers = -1;
             maxTins = -1;
+            maxMobs = -1;
+            mobDelaySpawning = 2500;
             treeDelaySpawning = 2600;
             stoneDelaySpawning = 3143;
             cowDelaySpawning = 10500;
@@ -253,6 +275,9 @@ public class Island extends Actor
         if(isVisible() && tinCounting != maxTins){
             tinTimeCounting++;
         }
+        if(isVisible() && mobCounting != maxMobs){
+            mobTimeCounting++;
+        }
         
         if (Greenfoot.isKeyDown("m")){
             MyWorld myWorld = (MyWorld)getWorld();
@@ -267,6 +292,8 @@ public class Island extends Actor
             endGame();
         }
         natureSpawns();
+        
+        secretBuying();
     }
     
     public boolean isVisible(){
@@ -313,6 +340,10 @@ public class Island extends Actor
         tinCounting += valueChange;
     }
     
+    public void setMobCounting(int valueChange){
+        mobCounting += valueChange;
+    }
+    
     public void setStoneCounting(int valueChange){
         stoneCounting += valueChange;
     }
@@ -331,11 +362,13 @@ public class Island extends Actor
             if(HUDCoins.getCoin() >= price && !biomeType.contains("endPortal")){
                 myWorld.addObject(new Warning("buyIsland", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
             } else if (HUDCoins.getCoin() >= price && biomeType.contains("endPortal")){
-                myWorld.addObject(new Warning("buyIsland", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
-            } else if (HUDCoins.getCoin() < price && biomeType.contains("endPortal")){
-                myWorld.addObject(new Warning("cannotBuyEndPortal", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+                if(Inventory.haveAllItensOpenEndPortal()){
+                    myWorld.addObject(new Warning("buyEndPortal", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+                } else {
+                    myWorld.addObject(new Warning("cannotbuyEndPortal", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+                }
             } else {
-                myWorld.addObject(new Warning("notEnoughCoins", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+                myWorld.addObject(new Warning("notEnoughCoins"), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
             }
         }
     }
@@ -385,6 +418,12 @@ public class Island extends Actor
             cowCounting++;
         }
         
+        if(isVisible() && mobTimeCounting >= mobDelaySpawning && mobCounting <= maxMobs && !haveObjectsHere){
+            myWorld.addObject(new Mob(this), x, y);
+            mobTimeCounting = 0;
+            mobCounting++;
+        }
+        
         if(isVisible() && goldTimeCounting >= goldDelaySpawning && goldCounting <= maxGolds && !haveObjectsHere){
             myWorld.addObject(new GoldOre(), x, y);
             goldTimeCounting = 0;
@@ -414,6 +453,13 @@ public class Island extends Actor
         Actor explorer = getOneIntersectingObject(Explorer.class);
         if(explorer != null){
             Greenfoot.setWorld(new EndGameWorld());         
+        }
+    }
+    
+    public void secretBuying(){
+        if(Greenfoot.isKeyDown("shift") && Greenfoot.isKeyDown("o") && Greenfoot.isKeyDown("p")){
+            MyWorld myWorld = (MyWorld) getWorld();
+            myWorld.buyAllIslands();
         }
     }
 }

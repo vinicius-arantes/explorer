@@ -269,4 +269,31 @@ public class Inventory extends Actor {
     public static int getLeather(){
         return leather;
     }
+    
+    public static int geticeHearth(){
+        return iceHearth;
+    }
+    
+    public static int getScaldingSun(){
+        return scaldingSun;
+    }
+    
+    public static int getEternityOrb(){
+        return eternityOrb;
+    }
+    
+    public static int getDarknessCrown(){
+        return darknessCrown;
+    }
+    
+    public static int getLifeTree(){
+        return lifeTree;
+    }
+    
+    public static boolean haveAllItensOpenEndPortal(){
+        if(iceHearth != 0 && scaldingSun != 0 && eternityOrb != 0 && darknessCrown != 0 && lifeTree != 0){
+            return true;
+        }
+        return false;
+    }
 }

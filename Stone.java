@@ -11,7 +11,7 @@ public class Stone extends Ore
     private String biomeType;
     
     public Stone(String biomeType){
-        super(125, "stone");
+        super(125, "rock");
         this.biomeType = biomeType;
     }
     

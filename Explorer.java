@@ -89,10 +89,8 @@ public class Explorer extends Actor
     
     public boolean haveIntersectingObjects(){
         Actor border = getOneIntersectingObject(Border.class);
-        Actor tree = getOneIntersectingObject(Tree.class);
-        Actor stone = getOneIntersectingObject(Stone.class);
         Actor ore = getOneIntersectingObject(Ore.class);
-        if(border != null || tree != null || stone != null || ore != null){
+        if(border != null || ore != null){
             return true;
         }
         return false;
@@ -100,6 +98,12 @@ public class Explorer extends Actor
     
     public int getDamageCapability(){
         return damageCapability;
+    }
+    
+    public void takeDamage(int damageGiven){
+        life -= damageGiven;
+        getWorld().getObjects(HUDLife.class).get(0).setAmount(-damageGiven);
+        endGame();
     }
     
     public void gainXp(int quantidade){
@@ -173,5 +177,11 @@ public class Explorer extends Actor
     
     public void upgradeBackpack(){
         backpackLevel++;
+    }
+    
+    public void endGame(){
+        if(life <= 0){
+            Greenfoot.setWorld(new GameOverWorld());        
+        }
     }
 }

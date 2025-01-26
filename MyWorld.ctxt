@@ -18,4 +18,6 @@ comment7.params=biomeName
 comment7.target=void\ removeBorders(java.lang.String)
 comment8.params=islandName
 comment8.target=Island\ getIsland(java.lang.String)
-numComments=9
+comment9.params=
+comment9.target=void\ buyAllIslands()
+numComments=10
