@@ -103,7 +103,7 @@ public class Merchant extends Actor
         List<Explorer> intersectingObjects = getIntersectingObjects(Explorer.class);
         List<MerchantHUD> intersectingHUDs = getWorld().getObjects(MerchantHUD.class);
         if(!intersectingObjects.isEmpty() && intersectingHUDs.isEmpty() && HUDDelay == 0){
-            getWorld().addObject(new MerchantHUD(), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+            getWorld().addObject(new MerchantHUD(intersectingObjects.get(0).getPickaxeLevel()), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
             setLocation(600, 375);
             HUDDelay = 1500;
         }

@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=MerchantHUD
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ MerchantHUD\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=MerchantHUD()
+comment1.params=level
+comment1.target=MerchantHUD(int)
 comment2.params=
 comment2.target=void\ act()
 comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ MerchantHUD\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
@@ -10,4 +10,8 @@ comment3.params=
 comment3.target=void\ changePage()
 comment4.params=
 comment4.target=void\ upgradeTool()
-numComments=5
+comment5.params=item\ level
+comment5.target=void\ haveEnoughItensToBuy(java.lang.String,\ int)
+comment6.params=type\ lastLevel
+comment6.target=void\ payForUpgrade(java.lang.String,\ int)
+numComments=7

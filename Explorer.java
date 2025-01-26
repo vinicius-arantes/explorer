@@ -9,7 +9,7 @@ import java.util.List;
 public class Explorer extends Actor
 {
     private int damageCapability;
-    private int life;
+    private static int life;
     private static int xp;
     private static int xpIncrease;
     private static int xpDificult;
@@ -141,6 +141,14 @@ public class Explorer extends Actor
         return xpPoint;
     }
     
+    public static int getXpLevel(){
+        return xpLevel;
+    }
+    
+    public static int getLife(){
+        return life;
+    }
+    
     public static void setXpPoint(){
         xpPoint -= 1;
     }
@@ -153,6 +161,14 @@ public class Explorer extends Actor
     public void upgradePickaxe(){
         pickaxeLevel++;
         damageCapability += 25;
+    }
+    
+    public int getPickaxeLevel(){
+        return pickaxeLevel;
+    }
+    
+    public int getBackpackLevel(){
+        return backpackLevel;
     }
     
     public void upgradeBackpack(){

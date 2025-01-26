@@ -80,13 +80,13 @@ public class Island extends Actor
         if(biomeType.contains("mainOverworld")){
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            maxTrees = 5;
-            maxStones = 5;
-            maxCows = 3;
-            maxGolds = 0;
-            maxIrons = 0;
-            maxCoppers = 0;
-            maxTins = 0;
+            maxTrees = 4;
+            maxStones = 4;
+            maxCows = 2;
+            maxGolds = -1;
+            maxIrons = -1;
+            maxCoppers = -1;
+            maxTins = -1;
             treeDelaySpawning = 2000;
             stoneDelaySpawning = 2543;
             cowDelaySpawning = 5500;
@@ -100,13 +100,13 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
-            maxTrees = 5;
-            maxStones = 5;
-            maxCows = 4;
-            maxGolds = 0;
-            maxIrons = 0;
-            maxCoppers = 0;
-            maxTins = 0;
+            maxTrees = 4;
+            maxStones = 4;
+            maxCows = 3;
+            maxGolds = -1;
+            maxIrons = -1;
+            maxCoppers = -1;
+            maxTins = -1;
             treeDelaySpawning = 2000;
             stoneDelaySpawning = 2543;
             cowDelaySpawning = 5500;
@@ -121,13 +121,13 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
-            maxTrees = 6;
-            maxStones = 3;
-            maxCows = 1;
-            maxGolds = 0;
-            maxIrons = 0;
-            maxCoppers = 0;
-            maxTins = 1;
+            maxTrees = 5;
+            maxStones = 2;
+            maxCows = 0;
+            maxGolds = -1;
+            maxIrons = -1;
+            maxCoppers = -1;
+            maxTins = 0;
             treeDelaySpawning = 2600;
             stoneDelaySpawning = 3143;
             cowDelaySpawning = 10500;
@@ -142,13 +142,13 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
-            maxTrees = 8;
-            maxStones = 0;
-            maxCows = 0;
-            maxGolds = 0;
-            maxIrons = 0;
-            maxCoppers = 2;
-            maxTins = 0;
+            maxTrees = 7;
+            maxStones = -1;
+            maxCows = -1;
+            maxGolds = -1;
+            maxIrons = -1;
+            maxCoppers = 1;
+            maxTins = -1;
             treeDelaySpawning = 2200;
             stoneDelaySpawning = 10000;
             cowDelaySpawning = 10000;
@@ -163,13 +163,13 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
-            maxTrees = 8;
-            maxStones = 0;
-            maxCows = 2;
-            maxGolds = 2;
-            maxIrons = 0;
-            maxCoppers = 0;
-            maxTins = 0;
+            maxTrees = 7;
+            maxStones = -1;
+            maxCows = 1;
+            maxGolds = 1;
+            maxIrons = -1;
+            maxCoppers = -1;
+            maxTins = -1;
             treeDelaySpawning = 3000;
             stoneDelaySpawning = 10543;
             cowDelaySpawning = 10500;
@@ -184,13 +184,13 @@ public class Island extends Actor
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
-            maxTrees = 4;
-            maxStones = 6;
-            maxCows = 0;
-            maxGolds = 0;
-            maxIrons = 2;
-            maxCoppers = 0;
-            maxTins = 0;
+            maxTrees = 3;
+            maxStones = 5;
+            maxCows = -1;
+            maxGolds = -1;
+            maxIrons = -1;
+            maxCoppers = -1;
+            maxTins = -1;
             treeDelaySpawning = 3500;
             stoneDelaySpawning = 2943;
             cowDelaySpawning = 5500;
@@ -201,17 +201,17 @@ public class Island extends Actor
         } else if(biomeType.contains("endPortal")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            setImage("tundraBiome.png");
+            setImage("endPortal.png");
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
-            maxTrees = 0;
-            maxStones = 0;
-            maxCows = 0;
-            maxGolds = 0;
-            maxIrons = 0;
-            maxCoppers = 0;
-            maxTins = 0;
+            maxTrees = -1;
+            maxStones = -1;
+            maxCows = -1;
+            maxGolds = -1;
+            maxIrons = -1;
+            maxCoppers = -1;
+            maxTins = -1;
             treeDelaySpawning = 2600;
             stoneDelaySpawning = 3143;
             cowDelaySpawning = 10500;
@@ -261,6 +261,10 @@ public class Island extends Actor
         } else {
             MyWorld myWorld = (MyWorld)getWorld();
             myWorld.hideIslands();
+        }
+        
+        if(biomeType.contains("endPortal")){
+            endGame();
         }
         natureSpawns();
     }
@@ -324,8 +328,12 @@ public class Island extends Actor
     public void callBuyIsland(){
         MyWorld myWorld = (MyWorld) getWorld();
         if(Greenfoot.mouseClicked(this) && myWorld.canBeVisualized(this)){
-            if(HUDCoins.getCoin() >= price){
+            if(HUDCoins.getCoin() >= price && !biomeType.contains("endPortal")){
                 myWorld.addObject(new Warning("buyIsland", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+            } else if (HUDCoins.getCoin() >= price && biomeType.contains("endPortal")){
+                myWorld.addObject(new Warning("buyIsland", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+            } else if (HUDCoins.getCoin() < price && biomeType.contains("endPortal")){
+                myWorld.addObject(new Warning("cannotBuyEndPortal", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
             } else {
                 myWorld.addObject(new Warning("notEnoughCoins", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
             }
@@ -399,6 +407,13 @@ public class Island extends Actor
             myWorld.addObject(new TinOre(), x, y);
             tinTimeCounting = 0;
             tinCounting++;
+        }
+    }
+    
+    public void endGame(){
+        Actor explorer = getOneIntersectingObject(Explorer.class);
+        if(explorer != null){
+            Greenfoot.setWorld(new EndGameWorld());         
         }
     }
 }

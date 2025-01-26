@@ -40,60 +40,83 @@ public class MarketHUD extends Actor {
 
     public void updateHUD() {
         // Cria a imagem base do HUD
-        GreenfootImage imagem = new GreenfootImage("inventory.png");
+        GreenfootImage imagem = new GreenfootImage("marketHUD.png");
 
         // Adiciona a imagem do slot selecionado
         String selectedImageName = "selected-" + selected + ".png";
         GreenfootImage selectedImage = new GreenfootImage(selectedImageName);
         imagem.drawImage(selectedImage, 0, 0); // Posiciona a imagem do slot selecionado no HUD
-
-        // Adiciona o texto do número de Log
-        GreenfootImage textoLog = new GreenfootImage("Troncos: " + Inventory.getLog(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoLog, 80, 100); // Posiciona o texto no HUD
+        
+        GreenfootImage textoLog = new GreenfootImage("" + Inventory.getLog(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage madeiraIcon = new GreenfootImage("madeiraIcon.png");
+        imagem.drawImage(madeiraIcon, 99, 90);
+        imagem.drawImage(textoLog, 120, 108);
 
         // Adiciona o texto do número de Stone
-        GreenfootImage textoStone = new GreenfootImage("Pedras: " + Inventory.getStone(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoStone, 140, 100); // Posiciona o texto no HUD
-    
+        GreenfootImage textoStone = new GreenfootImage("" + Inventory.getStone(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage stoneIcon = new GreenfootImage("rock.png");
+        imagem.drawImage(stoneIcon, 155, 90);
+        imagem.drawImage(textoStone, 176, 108); // Posiciona o texto no HUD
+
         // Adiciona o texto do número de Copper Ore
-        GreenfootImage textoCopperOre = new GreenfootImage("MCobres: " + Inventory.getCopperOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoCopperOre, 200, 100); // Posiciona o texto no HUD
+        GreenfootImage textoCopperOre = new GreenfootImage("" + Inventory.getCopperOre(), 15, Color.WHITE,new Color(0, 0, 0, 0));
+        GreenfootImage cobreOreIcon = new GreenfootImage("cobreItem.png");
+        imagem.drawImage(cobreOreIcon, 218, 90);
+        imagem.drawImage(textoCopperOre, 238, 108); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Copper
-        GreenfootImage textoCopper = new GreenfootImage("Cobres: " + Inventory.getCopper(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoCopper, 260, 100); // Posiciona o texto no HUD
+        GreenfootImage textoCopper = new GreenfootImage("" + Inventory.getCopper(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage cobreIcon = new GreenfootImage("cobreBarra.png");
+        imagem.drawImage(cobreIcon, 273, 90);
+        imagem.drawImage(textoCopper, 293, 108); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Tin Ore
-        GreenfootImage textoTinOre = new GreenfootImage("MEstanhos: " + Inventory.getTinOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoTinOre, 320, 100); // Posiciona o texto no HUD
+        GreenfootImage textoTinOre = new GreenfootImage("" + Inventory.getTinOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage tinOreIcon = new GreenfootImage("timItem.png");
+        imagem.drawImage(tinOreIcon, 335, 90);
+        imagem.drawImage(textoTinOre, 355, 108); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Tin
-        GreenfootImage textoTin = new GreenfootImage("Estanhos: " + Inventory.getTin(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoTin, 380, 100); // Posiciona o texto no HUD
+        GreenfootImage textoTin = new GreenfootImage("" + Inventory.getTin(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage tinIcon = new GreenfootImage("timBarra.png");
+        imagem.drawImage(tinIcon, 387, 90);
+        imagem.drawImage(textoTin, 407, 108); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Bronze
-        GreenfootImage textoBronze = new GreenfootImage("Bronzes: " + Inventory.getBronze(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoBronze, 80, 160); // Posiciona o texto no HUD
+        GreenfootImage textoBronze = new GreenfootImage("" + Inventory.getBronze(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage bronzeIcon = new GreenfootImage("cobreBarra.png");
+        imagem.drawImage(bronzeIcon, 99, 145);
+        imagem.drawImage(textoBronze, 120, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de IronOre
-        GreenfootImage textoIronOre = new GreenfootImage("MFerros: " + Inventory.getIronOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoIronOre, 140, 160); // Posiciona o texto no HUD
+        GreenfootImage textoIronOre = new GreenfootImage("" + Inventory.getIronOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage ironOreIcon = new GreenfootImage("ferroItem.png");
+        imagem.drawImage(ironOreIcon, 162, 145);
+        imagem.drawImage(textoIronOre, 182, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Iron
-        GreenfootImage textoIron = new GreenfootImage("Ferros: " + Inventory.getIron(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoIron, 200, 160); // Posiciona o texto no HUD
+        GreenfootImage textoIron = new GreenfootImage("" + Inventory.getIron(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage ironIcon = new GreenfootImage("ferroBarra.png");
+        imagem.drawImage(ironIcon, 218, 145);
+        imagem.drawImage(textoIron, 238, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Gold Ore
-        GreenfootImage textoGoldOre = new GreenfootImage("MOuro: " + Inventory.getGoldOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoGoldOre, 260, 160); // Posiciona o texto no HUD
+        GreenfootImage textoGoldOre = new GreenfootImage("" + Inventory.getGoldOre(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage goldOreIcon = new GreenfootImage("ouroItem.png");
+        imagem.drawImage(goldOreIcon, 277, 145);
+        imagem.drawImage(textoGoldOre, 297, 160); // Posiciona o texto no HUD
 
         // Adiciona o texto do número de Gold
-        GreenfootImage textoGold = new GreenfootImage("Ouro: " + Inventory.getGold(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoGold, 320, 160); // Posiciona o texto no HUD
-        
+        GreenfootImage textoGold = new GreenfootImage("" + Inventory.getGold(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage goldIcon = new GreenfootImage("ouroBarra.png");
+        imagem.drawImage(goldIcon, 335, 145);
+        imagem.drawImage(textoGold, 355, 160); // Posiciona o texto no HUD
+
         // Adiciona o texto do número de Couro
-        GreenfootImage textoLeather = new GreenfootImage("Couro: " + Inventory.getLeather(), 15, Color.WHITE, new Color(0, 0, 0, 0));
-        imagem.drawImage(textoLeather, 380, 160); // Posiciona o texto no HUD
+        GreenfootImage textoLeather = new GreenfootImage("" + Inventory.getLeather(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage couroIcon = new GreenfootImage("leather.png");
+        imagem.drawImage(couroIcon, 387, 145);
+        imagem.drawImage(textoLeather, 407, 160);
 
         // Define a nova imagem com tudo desenhado
         setImage(imagem);

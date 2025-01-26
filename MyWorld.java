@@ -61,7 +61,7 @@ public class MyWorld extends World {
         islandsMap.put(desert2.getName(), desert2);
         
         Island endPortal = new Island("endPortal", "endPortal", 28000);
-        addObject(endPortal, 600, 50);
+        addObject(endPortal, 600, 10);
         islandsMap.put(endPortal.getName(), endPortal);
         
         setBorders();
