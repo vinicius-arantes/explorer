@@ -383,6 +383,7 @@ public class Island extends Actor
         myWorld.removeBorders(getName());
         HUDCoins.setCoin(-price);
         MyWorld.showChalice(getType());
+        Greenfoot.playSound("buyIsland.mp3");
     }
     
     public boolean haveObjectsAtTheseCords(int x, int y){

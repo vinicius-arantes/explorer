@@ -70,6 +70,7 @@ public class Mob extends Actor
         if(explorer != null && delayAttack >= 150){
             getWorld().getObjects(Explorer.class).get(0).takeDamage(10);
             delayAttack = 0;
+            Greenfoot.playSound("hit.mp3");
         }
     }
     

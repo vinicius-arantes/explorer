@@ -78,11 +78,11 @@ public class Chalice extends Actor
     }
     
     public void updateHUD(){
-        GreenfootImage orbsAmountText = new GreenfootImage("" + orbAmount, 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage orbsAmountText = new GreenfootImage("" + orbAmount, 50, Color.WHITE, new Color(0, 0, 0, 0));
 
         GreenfootImage imagem = new GreenfootImage("offChalice.png");
     
-        imagem.drawImage(orbsAmountText, getX(), getY());
+        imagem.drawImage(orbsAmountText, 600, 375);
 
         setImage(imagem);
     }

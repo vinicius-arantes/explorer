@@ -170,72 +170,84 @@ public class MarketHUD extends Actor {
                 Inventory.takeItenLog(-1);
                 HUDCoins.setCoin(10);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 2 && Inventory.getStone() > 0){
                 Inventory.takeItenStone(-1);
                 HUDCoins.setCoin(10);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 3 && Inventory.getCopperOre() > 0){
                 Inventory.takeItenCopperOre(-1);
                 HUDCoins.setCoin(15);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 4 && Inventory.getCopper() > 0){
                 Inventory.takeItenCopper(-1);
                 HUDCoins.setCoin(30);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }   
             
             if (selected == 5 && Inventory.getTinOre() > 0){
                 Inventory.takeItenTinOre(-1);
                 HUDCoins.setCoin(15);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 6 && Inventory.getTin() > 0){
                 Inventory.takeItenTin(-1);
                 HUDCoins.setCoin(30);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 7 && Inventory.getBronze() > 0){
                 Inventory.takeItenBronze(-1);
                 HUDCoins.setCoin(100);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 8 && Inventory.getIronOre() > 0){
                 Inventory.takeItenIronOre(-1);
                 HUDCoins.setCoin(120);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 9 && Inventory.getIron() > 0){
                 Inventory.takeItenIron(-1);
                 HUDCoins.setCoin(150);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 10 && Inventory.getGoldOre() > 0){
                 Inventory.takeItenGoldOre(-1);
                 HUDCoins.setCoin(200);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }   
             
             if (selected == 11 && Inventory.getGold() > 0){
                 Inventory.takeItenGold(-1);
                 HUDCoins.setCoin(250);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
             
             if (selected == 12 && Inventory.getLeather() > 0){
                 Inventory.takeItenLeather(-1);
                 HUDCoins.setCoin(100);
                 Greenfoot.delay(10);
+                Greenfoot.playSound("buying.mp3");
             }
         }
     }

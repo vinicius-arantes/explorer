@@ -17,11 +17,12 @@ public class GameOverWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 1000, 1); 
+        Greenfoot.playSound("gameover.mp3");
     }
     
     public void act(){
         if(Greenfoot.isKeyDown("enter")){
-            Greenfoot.setWorld(new MyWorld());   
+            Greenfoot.setWorld(new MyWorld());
         } else if(Greenfoot.isKeyDown("escape")){
             Greenfoot.stop();   
         }
