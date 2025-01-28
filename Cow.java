@@ -32,17 +32,19 @@ public class Cow extends Actor
      */
     public void act()
     {
-        timeCounting++;
-        movimentar();
-        colisions();
-        if(life > 0){
-            decreaseLife();
-        } else {
-            MyWorld myWorld = (MyWorld)getWorld();
-            myWorld.addObject(new Leather(), getX()-5, getY()-2);
-            myWorld.addObject(new Xp(100), getX() + 5, getY() + 3);
-            spawnIsland.setCowCounting(-1);
-            myWorld.removeObject(this);
+        if(Pause.getGamePause() == false){
+            timeCounting++;
+            movimentar();
+            colisions();
+            if(life > 0){
+                decreaseLife();
+            } else {
+                MyWorld myWorld = (MyWorld)getWorld();
+                myWorld.addObject(new Leather(), getX()-5, getY()-2);
+                myWorld.addObject(new Xp(100), getX() + 5, getY() + 3);
+                spawnIsland.setCowCounting(-1);
+                myWorld.removeObject(this);
+            }
         }
     }
     

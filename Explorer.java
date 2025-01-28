@@ -10,6 +10,7 @@ public class Explorer extends Actor
 {
     private int damageCapability;
     private static int life;
+    private static int lifeMax;
     private static int xp;
     private static int xpIncrease;
     private static int xpDificult;
@@ -17,17 +18,20 @@ public class Explorer extends Actor
     private static int xpPoint;
     private int pickaxeLevel;
     private int backpackLevel;
+    private int regenCooldown;
     
     public Explorer(){
         damageCapability = 25;
         life = 100;
+        lifeMax = 100;
         xp = 0;
         xpIncrease = 1;
         xpDificult = 0;
         xpLevel = 1;
-        xpPoint = 30;
+        xpPoint = 0;
         pickaxeLevel = 1;
         backpackLevel = 0;
+        regenCooldown = 0;
     }
     
     /**
@@ -36,10 +40,12 @@ public class Explorer extends Actor
      */
     public void act()
     {
-        movimentar();
-        colisions();
-        openGuide();
-        upLevel();
+        if(Pause.getGamePause() == false){
+            movimentar();
+            colisions();
+            openGuide();
+            upLevel();
+        }
     }
     
     public void openGuide(){
@@ -115,6 +121,10 @@ public class Explorer extends Actor
         xpIncrease += quantidade;
     }
     
+    public static void secretIncrease(){
+        xpPoint = 30;
+    }
+    
     public void upLevel(){
         if( xp >= 100 + xpDificult && xpLevel < 30){
             xpLevel++;
@@ -158,8 +168,18 @@ public class Explorer extends Actor
     }
     
     public void changeLife(int quantidade){
-        life += quantidade;
+        lifeMax += quantidade;
         getWorld().getObjects(HUDLife.class).get(0).setAmount(xp);
+    }
+    
+    public void regenLife(){
+        if(regenCooldown > 0){
+            regenCooldown--;
+        } else if(regenCooldown == 0 && lifeMax < life){
+            life += 20;
+            regenCooldown = 10;
+        }
+        
     }
     
     public void upgradePickaxe(){

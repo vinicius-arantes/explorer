@@ -25,26 +25,28 @@ public class Mob extends Actor
      */
     public void act()
     {
-        followExplorer();
-        giveDamage();
-        delayAttack++;
-        if(life > 0){
-            decreaseLife();
-        } else {
-            MyWorld myWorld = (MyWorld)getWorld();
-            String islandType = spawnIsland.getType();
-            if(islandType.contains("desert")){
-                myWorld.addObject(new DesertOrb(), getX()-5, getY()-2);
-            } else if(islandType.contains("tundra")){
-                myWorld.addObject(new TundraOrb(), getX()-5, getY()-2);
-            } else if(islandType.contains("overworld") || islandType.contains("mainOverworld")){
-                myWorld.addObject(new OverworldOrb(), getX()-5, getY()-2);
-            } else if(islandType.contains("graveyard")){
-                myWorld.addObject(new GraveyardOrb(), getX()-5, getY()-2);
+        if(Pause.getGamePause() == false){
+            followExplorer();
+            giveDamage();
+            delayAttack++;
+            if(life > 0){
+                decreaseLife();
+            } else {
+                MyWorld myWorld = (MyWorld)getWorld();
+                String islandType = spawnIsland.getType();
+                if(islandType.contains("desert")){
+                    myWorld.addObject(new DesertOrb(), getX()-5, getY()-2);
+                } else if(islandType.contains("tundra")){
+                    myWorld.addObject(new TundraOrb(), getX()-5, getY()-2);
+                } else if(islandType.contains("overworld") || islandType.contains("mainOverworld")){
+                    myWorld.addObject(new OverworldOrb(), getX()-5, getY()-2);
+                } else if(islandType.contains("graveyard")){
+                    myWorld.addObject(new GraveyardOrb(), getX()-5, getY()-2);
+                }
+                myWorld.addObject(new Xp(150), getX() + 5, getY() + 3);
+                spawnIsland.setMobCounting(-1);
+                myWorld.removeObject(this);
             }
-            myWorld.addObject(new Xp(150), getX() + 5, getY() + 3);
-            spawnIsland.setMobCounting(-1);
-            myWorld.removeObject(this);
         }
     }
     

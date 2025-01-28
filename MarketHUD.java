@@ -24,12 +24,13 @@ public class MarketHUD extends Actor {
 
     public MarketHUD() {
         setImageInitial();
-        hudVisible = true;
+        hudVisible = false;
+        setImage((GreenfootImage) null); // Inicia com o HUD oculto
     }
 
     public void setImageInitial() {
         // Cria o HUD
-        GreenfootImage imagem = new GreenfootImage("inventory.png");
+        GreenfootImage imagem = new GreenfootImage("marketHUD.png");
         // Aplicamos transparencia no HUD
         imagem.setTransparency(240);
         // Aplica a imagem
@@ -122,21 +123,19 @@ public class MarketHUD extends Actor {
         setImage(imagem);
     }
 
-
-        public void handleHUDToggle() {
+    public void handleHUDToggle() {
         if (Market.getOpenMarket()) {
-            if (!hudVisible) {
-                hudVisible = true;
-                setImageInitial(); // Atualiza e exibe o HUD
+            hudVisible = true;
+            setImageInitial();
+            MyWorld myWorld = (MyWorld)getWorld();
+            myWorld.removeObject(this);
+            myWorld.addObject(this, myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+        } else {
+            hudVisible = false;
+            setImage((GreenfootImage) null); // Esconde o HUD
             }
-        } 
-        else {
-            if (hudVisible) {
-                hudVisible = false;
-                setImage((GreenfootImage) null); // Esconde o HUD
-            }
-        }
     }
+    
     
     public void moveSlots(){
         if(Greenfoot.isKeyDown("right") && hudVisible){
@@ -168,86 +167,86 @@ public class MarketHUD extends Actor {
         if(hudVisible && Greenfoot.isKeyDown("enter")){
             if (selected == 1 && Inventory.getLog() > 0){
                 Inventory.takeItenLog(-1);
-                HUDCoins.setCoin(10);
+                HUDCoins.setCoin(5);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
             
             if (selected == 2 && Inventory.getStone() > 0){
                 Inventory.takeItenStone(-1);
-                HUDCoins.setCoin(10);
+                HUDCoins.setCoin(7);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
             
             if (selected == 3 && Inventory.getCopperOre() > 0){
                 Inventory.takeItenCopperOre(-1);
-                HUDCoins.setCoin(15);
+                HUDCoins.setCoin(25);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
             
             if (selected == 4 && Inventory.getCopper() > 0){
                 Inventory.takeItenCopper(-1);
-                HUDCoins.setCoin(30);
+                HUDCoins.setCoin(35);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }   
             
             if (selected == 5 && Inventory.getTinOre() > 0){
                 Inventory.takeItenTinOre(-1);
-                HUDCoins.setCoin(15);
+                HUDCoins.setCoin(25);
                 Greenfoot.playSound("buying.mp3");
                 Greenfoot.delay(10);
             }
             
             if (selected == 6 && Inventory.getTin() > 0){
                 Inventory.takeItenTin(-1);
-                HUDCoins.setCoin(30);
+                HUDCoins.setCoin(35);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
             
             if (selected == 7 && Inventory.getBronze() > 0){
                 Inventory.takeItenBronze(-1);
-                HUDCoins.setCoin(100);
+                HUDCoins.setCoin(160);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
             
             if (selected == 8 && Inventory.getIronOre() > 0){
                 Inventory.takeItenIronOre(-1);
-                HUDCoins.setCoin(120);
+                HUDCoins.setCoin(65);
                 Greenfoot.playSound("buying.mp3");
                 Greenfoot.delay(10);
             }
             
             if (selected == 9 && Inventory.getIron() > 0){
                 Inventory.takeItenIron(-1);
-                HUDCoins.setCoin(150);
+                HUDCoins.setCoin(130);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
             
             if (selected == 10 && Inventory.getGoldOre() > 0){
                 Inventory.takeItenGoldOre(-1);
-                HUDCoins.setCoin(200);
+                HUDCoins.setCoin(100);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }   
             
             if (selected == 11 && Inventory.getGold() > 0){
                 Inventory.takeItenGold(-1);
-                HUDCoins.setCoin(250);
+                HUDCoins.setCoin(280);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
             
             if (selected == 12 && Inventory.getLeather() > 0){
                 Inventory.takeItenLeather(-1);
-                HUDCoins.setCoin(100);
+                HUDCoins.setCoin(20);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
+                Greenfoot.delay(1);
             }
         }
     }

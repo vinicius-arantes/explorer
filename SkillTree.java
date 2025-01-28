@@ -21,6 +21,7 @@ public class SkillTree extends Actor
     private int unlocked9;
     private boolean unlocked10;
     private boolean unlocked11;
+    private Pet pet;
     /**
      * Act - do whatever the Inventory wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -76,6 +77,12 @@ public class SkillTree extends Actor
     public void handleHUDToggle() {
         if (Greenfoot.isKeyDown("j")) {
             hudVisible = !hudVisible; // Alterna o estado
+            if(Pause.getGamePause()){
+                Pause.setGamePause(0);
+            }
+            else{
+                Pause.setGamePause(1);
+            }
             if (hudVisible) {
                 setImageInitial();
                 MyWorld myWorld = (MyWorld)getWorld();
@@ -85,6 +92,29 @@ public class SkillTree extends Actor
                 setImage((GreenfootImage) null); // Oculta o HUD
             }
             Greenfoot.delay(20); // Evita repetição rápida ao segurar a tecla
+        }
+        if(hudVisible && Greenfoot.isKeyDown("escape")){
+                setImage((GreenfootImage) null); // Oculta o HUD
+                hudVisible = false;
+                if(Pause.getGamePause()){
+                    Pause.setGamePause(0);
+                }
+                else{
+                    Pause.setGamePause(1);
+                }
+        }
+    }
+    
+    public void closeSkills(){
+        System.out.println("Antes de fechar: " + hudVisible);
+        setImage((GreenfootImage) null); // Oculta o HUD
+        hudVisible = false;
+        System.out.println("Depois de fechar: " + hudVisible);
+
+        if (Pause.getGamePause()) {
+            Pause.setGamePause(0);
+        } else {
+            Pause.setGamePause(1);
         }
     }
     
@@ -128,6 +158,7 @@ public class SkillTree extends Actor
     public void skillUptade(){ 
         if(selected == 6 && Greenfoot.isKeyDown("enter") && Explorer.getXpPoint() > 0 && unlocked6 == false){
             getWorld().addObject(new Merchant(), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+            
             Explorer.setXpPoint();
             unlocked6 = true;
         }
@@ -187,6 +218,7 @@ public class SkillTree extends Actor
         
         //Precisa do 8 para ser desbloqueado
         if(selected == 11 && Greenfoot.isKeyDown("enter") && Explorer.getXpPoint() > 0 && unlocked8 && unlocked11 == false){
+            getWorld().addObject(new Pet(), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
             
             Explorer.setXpPoint();
             unlocked11 = true;

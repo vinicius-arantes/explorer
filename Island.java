@@ -254,46 +254,48 @@ public class Island extends Actor
      */
     public void act()
     {
-        if(isVisible() && treeCounting != maxTrees){
-            treeTimeCounting++;
-        }
-        if(isVisible() && stoneCounting != maxStones){
-            stoneTimeCounting++;
-        }
-        if(isVisible() && cowCounting != maxCows){
-            cowTimeCounting++;
-        }
-        if(isVisible() && goldCounting != maxGolds){
-            goldTimeCounting++;
-        }
-        if(isVisible() && ironCounting != maxIrons){
-            ironTimeCounting++;
-        }
-        if(isVisible() && copperCounting != maxCoppers){
-            copperTimeCounting++;
-        }
-        if(isVisible() && tinCounting != maxTins){
-            tinTimeCounting++;
-        }
-        if(isVisible() && mobCounting != maxMobs){
-            mobTimeCounting++;
-        }
+        if(Pause.getGamePause() == false){
+            if(isVisible() && treeCounting != maxTrees){
+                treeTimeCounting++;
+            }
+            if(isVisible() && stoneCounting != maxStones){
+                stoneTimeCounting++;
+            }
+            if(isVisible() && cowCounting != maxCows){
+                cowTimeCounting++;
+            }
+            if(isVisible() && goldCounting != maxGolds){
+                goldTimeCounting++;
+            }
+            if(isVisible() && ironCounting != maxIrons){
+                ironTimeCounting++;
+            }
+            if(isVisible() && copperCounting != maxCoppers){
+                copperTimeCounting++;
+            }
+            if(isVisible() && tinCounting != maxTins){
+                tinTimeCounting++;
+            }
+            if(isVisible() && mobCounting != maxMobs){
+                mobTimeCounting++;
+            }
         
-        if (Greenfoot.isKeyDown("m")){
-            MyWorld myWorld = (MyWorld)getWorld();
-            myWorld.showIslands();
-            callBuyIsland();
-        } else {
-            MyWorld myWorld = (MyWorld)getWorld();
-            myWorld.hideIslands();
-        }
+            if (Greenfoot.isKeyDown("m")){
+                MyWorld myWorld = (MyWorld)getWorld();
+                myWorld.showIslands();
+                callBuyIsland();
+            } else {
+                MyWorld myWorld = (MyWorld)getWorld();
+                myWorld.hideIslands();
+            }
         
-        if(biomeType.contains("endPortal")){
-            endGame();
-        }
-        natureSpawns();
+            if(biomeType.contains("endPortal")){
+                endGame();
+            }
+            natureSpawns();
         
-        secretBuying();
+            secretBuying();
+        }
     }
     
     public boolean isVisible(){
@@ -462,6 +464,10 @@ public class Island extends Actor
         if(Greenfoot.isKeyDown("shift") && Greenfoot.isKeyDown("o") && Greenfoot.isKeyDown("p")){
             MyWorld myWorld = (MyWorld) getWorld();
             myWorld.buyAllIslands();
+            HUDCoins.setCoin(10000);
+            Explorer.secretIncrease();
+            Inventory.takeItenLog(1000);
+            Inventory.takeItenCopperOre(1000);
         }
     }
 }

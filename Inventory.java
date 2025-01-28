@@ -184,6 +184,12 @@ public class Inventory extends Actor {
     public void handleHUDToggle() {
         if (Greenfoot.isKeyDown("e")) {
             hudVisible = !hudVisible; // Alterna o estado
+            if(Pause.getGamePause()){
+                Pause.setGamePause(0);
+            }
+            else{
+                Pause.setGamePause(1);
+            }
             if (hudVisible) {
                 setImageInitial();
                 MyWorld myWorld = (MyWorld)getWorld();

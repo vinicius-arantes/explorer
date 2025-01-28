@@ -10,6 +10,7 @@ public class FurnaceHUD extends Actor
 {
     private boolean hudVisible;
     private int selected = 1;
+    private int timePass = 0;
     /**
      * Act - do whatever the Inventory wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -25,7 +26,8 @@ public class FurnaceHUD extends Actor
 
     public FurnaceHUD() {
         setImageInitial();
-        hudVisible = true;
+        hudVisible = false;
+        setImage((GreenfootImage) null); // Inicia com o HUD oculto
     }
 
     public void setImageInitial() {
@@ -76,20 +78,17 @@ public class FurnaceHUD extends Actor
         setImage(imagem);
     }
 
-
-        public void handleHUDToggle() {
+    public void handleHUDToggle() {
         if (Furnace.getOpenFurnace()) {
-            if (!hudVisible) {
-                hudVisible = true;
-                setImageInitial(); // Atualiza e exibe o HUD
+            hudVisible = true;
+            setImageInitial();
+            MyWorld myWorld = (MyWorld)getWorld();
+            myWorld.removeObject(this);
+            myWorld.addObject(this, myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+        } else {
+            hudVisible = false;
+            setImage((GreenfootImage) null); // Esconde o HUD
             }
-        } 
-        else {
-            if (hudVisible) {
-                hudVisible = false;
-                setImage((GreenfootImage) null); // Esconde o HUD
-            }
-        }
     }
     
     public void moveSlots(){
@@ -97,14 +96,14 @@ public class FurnaceHUD extends Actor
             if (selected < 12){ 
                 selected++;
                 Greenfoot.delay(10);
-                }
+            }
         }
     
         if(Greenfoot.isKeyDown("left") && hudVisible){
              if (selected > 1){ 
                 selected--;
                 Greenfoot.delay(10);
-                }
+            }
         }
     
         if(Greenfoot.isKeyDown("down") && hudVisible && selected + 6  < 13){
@@ -118,7 +117,82 @@ public class FurnaceHUD extends Actor
         }
     }
     
-    public void smeltingItem(){
+    public boolean smeltingTime(int time){
+        if(timePass < time){
+            timePass++;
+            Furnace.onOrOff(1);
+        } else{
+            timePass = 0;
+            return true;
+        }
+        return false;
+    }
     
+    public void smeltingItem(){
+        if(selected == 1 && Inventory.getCopperOre() >= 1 && Inventory.getLog() >= 1 && Greenfoot.isKeyDown("enter")){
+            if(smeltingTime(10)){
+                Inventory.takeItenLog(-1);
+                Inventory.takeItenCopperOre(-1);
+                Inventory.takeItenCopper(1);
+                
+                //GreenfootImage imagem = new GreenfootImage("FCselected.png");
+                //imagem.drawImage(imagem, 0, 0);
+            } else { 
+                smeltingTime(100);
+            }
+        }
+        
+        if(selected == 1 && Inventory.getTinOre() >= 1 && Inventory.getLog() >= 2 && Greenfoot.isKeyDown("enter")){
+            if(smeltingTime(10)){
+                Inventory.takeItenLog(-2);
+                Inventory.takeItenTinOre(-1);
+                Inventory.takeItenBronze(1);
+                
+                //GreenfootImage imagem = new GreenfootImage("FCselected.png");
+                //imagem.drawImage(imagem, 0, 0);
+            } else { 
+                smeltingTime(100);
+            }
+        }
+        
+        if(selected == 1 && Inventory.getCopperOre() >= 3 && Inventory.getTinOre() >= 1 && Inventory.getLog() >= 2 && Greenfoot.isKeyDown("enter")){
+            if(smeltingTime(10)){
+                Inventory.takeItenLog(-1);
+                Inventory.takeItenCopperOre(-3);
+                Inventory.takeItenTinOre(-1);
+                Inventory.takeItenTin(1);
+                
+                //GreenfootImage imagem = new GreenfootImage("FCselected.png");
+                //imagem.drawImage(imagem, 0, 0);
+            } else { 
+                smeltingTime(100);
+                }   
+        }
+        
+        if(selected == 1 && Inventory.getIronOre() >= 1 && Inventory.getLog() >= 4 && Greenfoot.isKeyDown("enter")){
+            if(smeltingTime(10)){
+                Inventory.takeItenLog(-4);
+                Inventory.takeItenIronOre(-1);
+                Inventory.takeItenIron(1);
+                
+                //GreenfootImage imagem = new GreenfootImage("FCselected.png");
+                //imagem.drawImage(imagem, 0, 0);
+            } else { 
+                smeltingTime(100);
+            }
+        }
+        
+        if(selected == 1 && Inventory.getGoldOre() >= 1 && Inventory.getLog() >= 8 && Greenfoot.isKeyDown("enter")){
+            if(smeltingTime(10)){
+                Inventory.takeItenLog(-8);
+                Inventory.takeItenGoldOre(-1);
+                Inventory.takeItenGold(1);
+                
+                //GreenfootImage imagem = new GreenfootImage("FCselected.png");
+                //imagem.drawImage(imagem, 0, 0);
+            } else { 
+                smeltingTime(100);
+            }
+        }
     }
 }
