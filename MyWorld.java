@@ -195,19 +195,19 @@ public class MyWorld extends World {
     
     public void setChalices(){
         Chalice tundraChalice = new Chalice("tundra", 300);
-        addObject(tundraChalice, 1000, 375);
+        addObject(tundraChalice, 200, 100);
         chalicesMap.add(tundraChalice);
         
         Chalice desertChalice = new Chalice("desert", 300);
-        addObject(desertChalice, 200, 375);
+        addObject(desertChalice, 1000, 600);
         chalicesMap.add(desertChalice);
         
         Chalice overworldChalice = new Chalice("overworld", 300);
-        addObject(overworldChalice, 600, 375);
+        addObject(overworldChalice, 200, 600);
         chalicesMap.add(overworldChalice);
         
         Chalice graveyardChalice = new Chalice("graveyard", 300);
-        addObject(graveyardChalice, 600, 625);
+        addObject(graveyardChalice, 1000, 100);
         chalicesMap.add(graveyardChalice);
     }
     

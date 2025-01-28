@@ -67,5 +67,15 @@ public class Ore extends Actor
                 }
             }
         }
+        if(isTouching(Pet.class)){
+            life -= 500;
+            if(life < 100 && life > 50){
+                setImage(type + "Damaged75.png");
+            } else if (life < 75 && life > 25){
+                setImage(type + "Damaged50.png");
+            } else if(life < 50 && life > 0){
+                setImage(type + "Damaged25.png");
+            }
+        }
     }
 }

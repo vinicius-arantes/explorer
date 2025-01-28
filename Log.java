@@ -6,23 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Log extends Actor
+public class Log extends Drop
 {   
-    /**
-     * Act - do whatever the Log wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        if (isTouching(Explorer.class)) {
-            // Aumenta a quantidade de Log no Inventory
-            Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
-            if (inventory != null) {
-                inventory.takeItenLog(1);
-            }
-            
-            // Remove este objeto do mundo
-            getWorld().removeObject(this);
-        }
+    public Log(){
+        super("log");
     }
 }

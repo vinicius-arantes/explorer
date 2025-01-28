@@ -1,8 +1,14 @@
 #BlueJ class context
 comment0.target=Furnace
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Furnace\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Market\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=void\ act()
 comment2.params=
-comment2.target=boolean\ getOpenFurnace()
-numComments=3
+comment2.target=void\ togglePause()
+comment3.params=
+comment3.target=boolean\ getOpenFurnace()
+comment4.params=
+comment4.target=void\ onOff()
+comment5.params=value
+comment5.target=void\ onOrOff(int)
+numComments=6
