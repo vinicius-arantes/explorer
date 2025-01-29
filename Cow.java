@@ -14,6 +14,7 @@ public class Cow extends Actor
     private int alreadyWalked;
     private int walkDirection;
     private int life;
+    private static boolean increase;
     private Island spawnIsland;
     
     public Cow(Island island){
@@ -24,6 +25,7 @@ public class Cow extends Actor
         walkDirection = 2;
         life = 100;
         spawnIsland = island;
+        increase = false;
     }
     
     /**
@@ -32,17 +34,22 @@ public class Cow extends Actor
      */
     public void act()
     {
-        timeCounting++;
-        movimentar();
-        colisions();
-        if(life > 0){
-            decreaseLife();
-        } else {
-            MyWorld myWorld = (MyWorld)getWorld();
-            myWorld.addObject(new Leather(), getX()-5, getY()-2);
-            myWorld.addObject(new Xp(100), getX() + 5, getY() + 3);
-            spawnIsland.setCowCounting(-1);
-            myWorld.removeObject(this);
+        if(Pause.getGamePause() == false){
+            timeCounting++;
+            movimentar();
+            colisions();
+            if(life > 0){
+                decreaseLife();
+            } else {
+                MyWorld myWorld = (MyWorld)getWorld();
+                myWorld.addObject(new Leather(), getX()-5, getY()-2);
+                if(increase){
+                    myWorld.addObject(new Leather(), getX()-5, getY()-2);
+                }
+                myWorld.addObject(new Xp(100), getX() + 5, getY() + 3);
+                spawnIsland.setCowCounting(-1);
+                myWorld.removeObject(this);
+            }
         }
     }
     
@@ -110,7 +117,7 @@ public class Cow extends Actor
             Explorer explorer = (Explorer) getWorld().getObjects(Explorer.class).get(0);
             double distance = Math.sqrt(Math.pow(explorer.getX() - getX(), 2) + Math.pow(explorer.getY() - getY(), 2));
             if(distance < 50){
-                life -= explorer.getDamageCapability();
+                life -= explorer.getDamageCapabilityMobs();
                 if(life < 100 && life > 50){
                     setImage("cow.png");
                 } else if (life < 75 && life > 25){
@@ -120,5 +127,9 @@ public class Cow extends Actor
                 }
             }
         }
+    }
+    
+    public static void increaseDrop(){
+        increase = true;
     }
 }

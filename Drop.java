@@ -20,7 +20,6 @@ public class Drop extends Actor
     public void act()
     {
         if (isTouching(Explorer.class)) {
-            // Aumenta a quantidade de Bronze no Inventory
             Inventory inventory = (Inventory) getWorld().getObjects(Inventory.class).get(0);
             if (inventory != null) {
                 if(type.contains("iron")){
@@ -39,7 +38,13 @@ public class Drop extends Actor
                     inventory.setGraveyardOrb(1);
                 } else if(type.contains("deOrb")){
                     inventory.setDesertOrb(1);
-                }
+                } else if(type.contains("stone")){
+                    inventory.takeItenStone(1);
+                } else if(type.contains("log")){
+                    inventory.takeItenLog(1);
+                } else if(type.contains("leather")){
+                    inventory.takeItenLeather(1);
+                }  
             }
 
             // Remove este objeto do mundo

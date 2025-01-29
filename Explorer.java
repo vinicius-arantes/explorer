@@ -9,7 +9,9 @@ import java.util.List;
 public class Explorer extends Actor
 {
     private int damageCapability;
+    private int damageCapabilityMobs;
     private static int life;
+    private static int lifeMax;
     private static int xp;
     private static int xpIncrease;
     private static int xpDificult;
@@ -17,17 +19,25 @@ public class Explorer extends Actor
     private static int xpPoint;
     private int pickaxeLevel;
     private int backpackLevel;
+    private int regenCooldown;
+    private int reciveRecentDemage;
+    private int speed;
     
     public Explorer(){
         damageCapability = 25;
+        damageCapabilityMobs = 25;
         life = 100;
+        lifeMax = 100;
         xp = 0;
         xpIncrease = 1;
         xpDificult = 0;
         xpLevel = 1;
-        xpPoint = 30;
-        pickaxeLevel = 1;
+        xpPoint = 0;
+        pickaxeLevel = 0;
         backpackLevel = 0;
+        regenCooldown = 0;
+        reciveRecentDemage = 0;
+        speed = 2;
     }
     
     /**
@@ -36,10 +46,13 @@ public class Explorer extends Actor
      */
     public void act()
     {
-        movimentar();
-        colisions();
-        openGuide();
-        upLevel();
+        if(Pause.getGamePause() == false){
+            movimentar();
+            colisions();
+            openGuide();
+            upLevel();
+            regenLife();
+        }
     }
     
     public void openGuide(){
@@ -55,17 +68,17 @@ public class Explorer extends Actor
     public void movimentar() {
         // Movimento com as setas do teclado
         if (Greenfoot.isKeyDown("w")) {
-            setLocation(getX(), getY() - 2); // Move para cima
+            setLocation(getX(), getY() - speed); // Move para cima
         }
         if (Greenfoot.isKeyDown("s")) {
-            setLocation(getX(), getY() + 2); // Move para baixo
+            setLocation(getX(), getY() + speed); // Move para baixo
         }
         if (Greenfoot.isKeyDown("a")) {
-            setLocation(getX() - 2, getY()); // Move para a esquerda
+            setLocation(getX() - speed, getY()); // Move para a esquerda
             setImage("mainCharac.png");
         }
         if (Greenfoot.isKeyDown("d")) {
-            setLocation(getX() + 2, getY()); // Move para a direita
+            setLocation(getX() + speed, getY()); // Move para a direita
             setImage("mainCharacRight.png");
         }
     }
@@ -73,16 +86,16 @@ public class Explorer extends Actor
     public void colisions(){
         if(haveIntersectingObjects()){
             if (Greenfoot.isKeyDown("w")) {
-                setLocation(getX(), getY() + 2); // Nega o movimento pra cima
+                setLocation(getX(), getY() + speed); // Nega o movimento pra cima
             }
             if (Greenfoot.isKeyDown("s")) {
-                setLocation(getX(), getY() - 2); // Nega o movimento pra baixo
+                setLocation(getX(), getY() - speed); // Nega o movimento pra baixo
             }
             if (Greenfoot.isKeyDown("a")) {
-                setLocation(getX() + 2, getY()); // Nega o movimento pra esquerda
+                setLocation(getX() + speed, getY()); // Nega o movimento pra esquerda
             }
             if (Greenfoot.isKeyDown("d")) {
-                setLocation(getX() - 2, getY()); // Nega o movimento pra direita
+                setLocation(getX() - speed, getY()); // Nega o movimento pra direita
             }
         }
     }
@@ -100,10 +113,33 @@ public class Explorer extends Actor
         return damageCapability;
     }
     
+    public int getDamageCapabilityMobs(){
+        return damageCapabilityMobs;
+    }
+    
     public void takeDamage(int damageGiven){
         life -= damageGiven;
         getWorld().getObjects(HUDLife.class).get(0).setAmount(-damageGiven);
+        reciveRecentDemage = 600;
         endGame();
+    }
+    
+    public void changeLife(int quantidade){
+        lifeMax += quantidade;
+        getWorld().getObjects(HUDLife.class).get(0).setAmount(lifeMax);
+    }
+    
+    public void regenLife(){
+        if(reciveRecentDemage > 0){
+            reciveRecentDemage--;
+        }
+        if(regenCooldown > 0){
+            regenCooldown--;
+        } else if(regenCooldown == 0 && lifeMax + 1 >= life && reciveRecentDemage == 0){
+            getWorld().getObjects(HUDLife.class).get(0).setAmount(10);
+            life +=10;
+            regenCooldown = 1800;
+        }
     }
     
     public void gainXp(int quantidade){
@@ -113,6 +149,10 @@ public class Explorer extends Actor
     
     public void gainXpIncrease(int quantidade){
         xpIncrease += quantidade;
+    }
+    
+    public static void secretIncrease(){
+        xpPoint = 30;
     }
     
     public void upLevel(){
@@ -157,14 +197,18 @@ public class Explorer extends Actor
         xpPoint -= 1;
     }
     
-    public void changeLife(int quantidade){
-        life += quantidade;
-        getWorld().getObjects(HUDLife.class).get(0).setAmount(xp);
-    }
-    
     public void upgradePickaxe(){
         pickaxeLevel++;
-        damageCapability += 25;
+        if(pickaxeLevel <= 3){
+            damageCapability += 25;
+            damageCapabilityMobs += 25;
+        } else if(pickaxeLevel == 4){
+            damageCapability += 75;
+            damageCapabilityMobs += 75;
+        } else if(pickaxeLevel == 5){
+            damageCapability += 125;
+            damageCapabilityMobs += 125;
+        }
     }
     
     public int getPickaxeLevel(){
@@ -177,6 +221,18 @@ public class Explorer extends Actor
     
     public void upgradeBackpack(){
         backpackLevel++;
+    }
+    
+    public void increaseSpeed(){
+        speed++;
+    }
+    
+    public void increaseHarvestLevel(){
+        damageCapability += 25;
+    }
+    
+    public void increaseDamageLevel(){
+        damageCapabilityMobs += 25;
     }
     
     public void endGame(){
