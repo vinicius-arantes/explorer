@@ -54,6 +54,10 @@ public class Furnace extends Actor
         return openFurnace;
     }
     
+    public static boolean getonOrOff(){
+        return onFurnace;
+    }
+    
     public void onOff(){
         if(onFurnace && !setted){
             setted = true;
@@ -61,8 +65,8 @@ public class Furnace extends Actor
             setImage(imagem);
         }
         
-        if(!onFurnace && !setted){
-            setted = true;
+        if(!onFurnace && setted){
+            setted = false;
             GreenfootImage imagem = new GreenfootImage("fornalhaOff.png");
             setImage(imagem);
         }
@@ -70,11 +74,9 @@ public class Furnace extends Actor
     
     public static void onOrOff(int value){
         if(value == 0){
-            onFurnace = false;
-            setted = false;
-        } else{
             onFurnace = true;
-            setted = false;
+        } else{
+            onFurnace = false;
         }
     }
 }

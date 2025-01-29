@@ -9,10 +9,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class HUDCoins extends Actor
 {
     private static int coin;
+    private static float increase;
+    private static boolean rendaFixa;
+    private int rendaFixaCooldown;
     
     public HUDCoins()
     {
         coin = 0;
+        increase = 1;
+        rendaFixa = false;
+        rendaFixaCooldown = 180;
     }
     
     /**
@@ -22,6 +28,7 @@ public class HUDCoins extends Actor
     public void act()
     {
         updadeHUDCoin();
+        rendaFixaMaker();
     }
     
     public void setImageInitial()
@@ -74,9 +81,26 @@ public class HUDCoins extends Actor
     
     public static void setCoin(int adicionar)
     {
-        coin += adicionar;
+        coin += adicionar * increase;
         if(coin < 0){
             coin = 0;
+        }
+    }
+    
+    public static void setIncrease(double adicionar){
+        increase += adicionar;
+    }
+    
+    public static void rendaFixaOn(){
+        rendaFixa = true;
+    }
+    
+    public void rendaFixaMaker(){
+        if(rendaFixa && Pause.getGamePause() == false && rendaFixaCooldown > 0){
+            rendaFixaCooldown--;
+        }else if(rendaFixa && Pause.getGamePause() == false && rendaFixaCooldown == 0){
+            setCoin(1);
+            rendaFixaCooldown = 180;
         }
     }
     

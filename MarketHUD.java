@@ -8,6 +8,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MarketHUD extends Actor {
     private boolean hudVisible;
+    private boolean isEnterPressed;
     private int selected = 1;
     /**
      * Act - do whatever the Inventory wants to do. This method is called whenever
@@ -25,6 +26,7 @@ public class MarketHUD extends Actor {
     public MarketHUD() {
         setImageInitial();
         hudVisible = false;
+        isEnterPressed = false;
         setImage((GreenfootImage) null); // Inicia com o HUD oculto
     }
 
@@ -138,116 +140,107 @@ public class MarketHUD extends Actor {
     
     
     public void moveSlots(){
-        if(Greenfoot.isKeyDown("right") && hudVisible){
+        if((Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) && hudVisible){
             if (selected < 12){ 
                 selected++;
-                Greenfoot.delay(10);
+                Greenfoot.delay(8);
                 }
         }
     
-        if(Greenfoot.isKeyDown("left") && hudVisible){
+        if((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && hudVisible){
              if (selected > 1){ 
                 selected--;
-                Greenfoot.delay(10);
+                Greenfoot.delay(8);
                 }
         }
     
-        if(Greenfoot.isKeyDown("down") && hudVisible && selected + 6  < 13){
+        if((Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) && hudVisible && selected + 6  < 13){
          selected += 6;
-         Greenfoot.delay(10);
+         Greenfoot.delay(8);
         }
     
-        if(Greenfoot.isKeyDown("up") && hudVisible && selected - 6 > 0){
+        if((Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")) && hudVisible && selected - 6 > 0){
          selected -= 6;
-         Greenfoot.delay(10);
+         Greenfoot.delay(8);
         }
     }
     
     public void tradeItens(){
-        if(hudVisible && Greenfoot.isKeyDown("enter")){
+        if(hudVisible && (Greenfoot.isKeyDown("enter") || Greenfoot.isKeyDown("space")) && !isEnterPressed){
+            isEnterPressed = true;
             if (selected == 1 && Inventory.getLog() > 0){
                 Inventory.takeItenLog(-1);
                 HUDCoins.setCoin(5);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
             
             if (selected == 2 && Inventory.getStone() > 0){
                 Inventory.takeItenStone(-1);
                 HUDCoins.setCoin(7);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
             
             if (selected == 3 && Inventory.getCopperOre() > 0){
                 Inventory.takeItenCopperOre(-1);
                 HUDCoins.setCoin(25);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
             
             if (selected == 4 && Inventory.getCopper() > 0){
                 Inventory.takeItenCopper(-1);
                 HUDCoins.setCoin(35);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }   
             
             if (selected == 5 && Inventory.getTinOre() > 0){
                 Inventory.takeItenTinOre(-1);
                 HUDCoins.setCoin(25);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
             }
             
             if (selected == 6 && Inventory.getTin() > 0){
                 Inventory.takeItenTin(-1);
                 HUDCoins.setCoin(35);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
             
             if (selected == 7 && Inventory.getBronze() > 0){
                 Inventory.takeItenBronze(-1);
                 HUDCoins.setCoin(160);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
             
             if (selected == 8 && Inventory.getIronOre() > 0){
                 Inventory.takeItenIronOre(-1);
                 HUDCoins.setCoin(65);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(10);
             }
             
             if (selected == 9 && Inventory.getIron() > 0){
                 Inventory.takeItenIron(-1);
                 HUDCoins.setCoin(130);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
             
             if (selected == 10 && Inventory.getGoldOre() > 0){
                 Inventory.takeItenGoldOre(-1);
                 HUDCoins.setCoin(100);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }   
             
             if (selected == 11 && Inventory.getGold() > 0){
                 Inventory.takeItenGold(-1);
                 HUDCoins.setCoin(280);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
             
             if (selected == 12 && Inventory.getLeather() > 0){
                 Inventory.takeItenLeather(-1);
                 HUDCoins.setCoin(20);
                 Greenfoot.playSound("buying.mp3");
-                Greenfoot.delay(1);
             }
+        } else if(Greenfoot.isKeyDown("enter") == false && Greenfoot.isKeyDown("space") == false){
+           isEnterPressed = false; 
         }
     }
 }

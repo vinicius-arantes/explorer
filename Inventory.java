@@ -24,6 +24,7 @@ public class Inventory extends Actor {
     private static int tundraOrb;
     private static int graveyardOrb;
     private boolean hudVisible;
+    private boolean isEPressed;
 
     /**
      * Act - do whatever the Inventory wants to do. This method is called whenever
@@ -55,6 +56,7 @@ public class Inventory extends Actor {
         tundraOrb = 0;
         graveyardOrb = 0;
         hudVisible = false;
+        isEPressed = false;
         setImage((GreenfootImage) null); // Inicia com o HUD oculto
     }
 
@@ -182,8 +184,9 @@ public class Inventory extends Actor {
     }
 
     public void handleHUDToggle() {
-        if (Greenfoot.isKeyDown("e")) {
+        if (Greenfoot.isKeyDown("e") && !isEPressed) {
             hudVisible = !hudVisible; // Alterna o estado
+            isEPressed = true;
             if(Pause.getGamePause()){
                 Pause.setGamePause(0);
             }
@@ -198,7 +201,8 @@ public class Inventory extends Actor {
             } else {
                 setImage((GreenfootImage) null); // Oculta o HUD
             }
-            Greenfoot.delay(20); // Evita repetição rápida ao segurar a tecla
+        } else if (Greenfoot.isKeyDown("e") == false){
+            isEPressed = false;
         }
     }
 

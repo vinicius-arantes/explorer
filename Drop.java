@@ -42,7 +42,9 @@ public class Drop extends Actor
                     inventory.takeItenStone(1);
                 } else if(type.contains("log")){
                     inventory.takeItenLog(1);
-                } 
+                } else if(type.contains("leather")){
+                    inventory.takeItenLeather(1);
+                }  
             }
 
             // Remove este objeto do mundo

@@ -80,9 +80,7 @@ public class Pet extends Actor {
     private void captureInput() {
         String key = Greenfoot.getKey(); // Captura a tecla pressionada
         if (key != null) {
-            if (key.equals("enter") && petName.isEmpty()){
-                petName = "carlos";
-            } else if (key.equals("enter") && !petName.isEmpty()) {
+            if (key.equals("enter") && !petName.isEmpty()) {
                 isTyping = false;
                 updatePetImage();
             } else if (key.equals("backspace") && petName.length() > 0) {

@@ -12,6 +12,7 @@ public class Island extends Actor
     private String biomeName = "overworld";
     private String biomeType = "overworld";
     private int price;
+    private static double discount;
     private boolean visible;
     
     private int treeTimeCounting;
@@ -57,7 +58,8 @@ public class Island extends Actor
     public Island(String biomeName, String biomeType, int price){
         visible = false;
         prepareBiomes(biomeName, biomeType);
-        this.price = price;
+        discount = 0;
+        this.price = price - (int)(price * discount);
         
         treeTimeCounting = Greenfoot.getRandomNumber(3500);
         treeCounting = 0;
@@ -356,6 +358,10 @@ public class Island extends Actor
     
     public void setCowCounting(int valueChange){
         cowCounting += valueChange;
+    }
+    
+    public static void increaseDiscount(){
+        discount = 0.2;
     }
     
     public void callBuyIsland(){
