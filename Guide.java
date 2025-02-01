@@ -27,7 +27,7 @@ public class Guide extends Actor
     }
     
     public void changePage(){
-        if(Greenfoot.isKeyDown("right") && page != 9){
+        if(Greenfoot.isKeyDown("right") && page != 7){
             page++;
             setImage("guia" + page + ".png");
             Greenfoot.delay(10);

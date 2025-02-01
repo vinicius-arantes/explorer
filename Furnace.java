@@ -8,11 +8,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Furnace extends Actor
 {
-    private boolean wasTouching = false;
-    private static boolean openFurnace = false;
+    private boolean wasTouching;
+    private static boolean openFurnace;
     private Espaco espaco;
-    private static boolean onFurnace = false;
-    private static boolean setted = false;
+    private static boolean onFurnace;
+    private static boolean setted;
+    
+    public Furnace(){
+        onFurnace = false;
+        setted = false;
+        openFurnace = false;
+        wasTouching = false;
+        GreenfootImage image = getImage();
+        image.setTransparency(0);
+        setImage(image);
+    }
+    
     public void act() {
         boolean isCurrentlyTouching = isTouching(Explorer.class);
         if (isCurrentlyTouching && !wasTouching) {
@@ -78,5 +89,11 @@ public class Furnace extends Actor
         } else{
             onFurnace = false;
         }
+    }
+    
+    public void showFurnace(){
+        GreenfootImage image = getImage();
+        image.setTransparency(255);
+        setImage(image);
     }
 }

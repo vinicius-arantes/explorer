@@ -15,27 +15,10 @@ public class Mob extends Actor
     private static boolean increase;
     
     public Mob(Island spawnIsland){
-        String islandType = spawnIsland.getType();
         increase = false;
         delayAttack = 200;
         this.spawnIsland = spawnIsland;
         prepareSkin(spawnIsland);
-        if (islandType.contains("overworld")){
-            life = 150;
-            damage = 10;
-        }
-        if (islandType.contains("desert")){
-            life = 300;
-            damage = 13;
-        }
-        if (islandType.contains("tundra")){
-            life = 600;
-            damage = 18;
-        }
-        if (islandType.contains("graveyard")){
-            life = 1050;
-            damage = 20;
-        }
     }
     
     /**
@@ -108,7 +91,24 @@ public class Mob extends Actor
     }
     
     public void prepareSkin(Island spawnIsland){
-        setImage("" + spawnIsland.getType() + "Mob.png");
+        String type = spawnIsland.getType();
+        setImage("" + type + "Mob.png");
+        if (type.contains("overworld") || type.contains("mainOverworld")){
+            life = 150;
+            damage = 10;
+        }
+        if (type.contains("desert")){
+            life = 300;
+            damage = 13;
+        }
+        if (type.contains("tundra")){
+            life = 600;
+            damage = 18;
+        }
+        if (type.contains("graveyard")){
+            life = 1050;
+            damage = 20;
+        }
     }
     
     public void decreaseLife(){

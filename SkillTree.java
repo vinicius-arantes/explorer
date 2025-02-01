@@ -72,6 +72,9 @@ public class SkillTree extends Actor
         GreenfootImage selectedImage = new GreenfootImage(selectedImageName);
         imagem.drawImage(selectedImage, 0, 0); // Posiciona a imagem do slot selecionado no HUD
         
+        GreenfootImage xp = new GreenfootImage("" + Explorer.getXpPoint(), 22, Color.GREEN , new Color(0, 0, 0, 0));
+        imagem.drawImage(xp, 385, 470);
+        
         // Define a nova imagem com tudo desenhado
         setImage(imagem);
     }

@@ -54,6 +54,10 @@ public class Warning extends Actor
             setImage(warningType + ".png");
         } else if (warningType.contains("notEnoughCoins")){
             setImage(warningType + ".png");
+        } else if (warningType.contains("cannotBuyEndPortal")){
+            setImage(warningType + ".png");
+        } else if (warningType.contains("buyEndPortal")){
+            setImage(warningType + ".png");
         }
     }
 }

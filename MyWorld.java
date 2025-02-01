@@ -22,6 +22,7 @@ public class MyWorld extends World {
         super(1200, 750, 1);
         prepare();
         Greenfoot.playSound("introductionAudio.mp3");
+        new Statistic();
     }
 
     public void prepare() {
@@ -29,7 +30,7 @@ public class MyWorld extends World {
         addObject(tundra2, 200, 125);
         islandsMap.put(tundra2.getName(), tundra2);
         
-        Island desert = new Island("desert1", "desert", 600);
+        Island desert = new Island("desert1", "desert", 400);
         addObject(desert, 200, 375);
         islandsMap.put(desert.getName(), desert);
 
@@ -63,12 +64,15 @@ public class MyWorld extends World {
         islandsMap.put(desert2.getName(), desert2);
         
         Island endPortal = new Island("endPortal", "endPortal", 28000);
-        addObject(endPortal, 600, 10);
+        addObject(endPortal, 600, 35);
         islandsMap.put(endPortal.getName(), endPortal);
         
         setBorders();
         
         setChalices();
+        
+        Furnace furnace = new Furnace();
+        addObject(furnace, 200, 350);
         
         Explorer explorer = new Explorer();
         addObject(explorer, 600, 375);
@@ -87,16 +91,6 @@ public class MyWorld extends World {
         
         SkillTree skilltree = new SkillTree();
         addObject(skilltree, getWidth() / 2, getHeight() / 2);
-        
-        GoldOre goldOre = new GoldOre();
-        addObject(goldOre, 480, 255);
-        GoldOre goldOre2 = new GoldOre();
-        addObject(goldOre2, 500, 255);
-        GoldOre goldOre3 = new GoldOre();
-        addObject(goldOre3, 460, 255);
-        GoldOre goldOre4 = new GoldOre();
-        addObject(goldOre4, 540, 255);
-        
         
         Guide guide = new Guide();
         addObject(guide, 600, 350);
@@ -194,19 +188,19 @@ public class MyWorld extends World {
     }
     
     public void setChalices(){
-        Chalice tundraChalice = new Chalice("tundra", 300);
+        Chalice tundraChalice = new Chalice("tundra", 50);
         addObject(tundraChalice, 200, 100);
         chalicesMap.add(tundraChalice);
         
-        Chalice desertChalice = new Chalice("desert", 300);
+        Chalice desertChalice = new Chalice("desert", 50);
         addObject(desertChalice, 1000, 600);
         chalicesMap.add(desertChalice);
         
-        Chalice overworldChalice = new Chalice("overworld", 300);
+        Chalice overworldChalice = new Chalice("overworld", 50);
         addObject(overworldChalice, 200, 600);
         chalicesMap.add(overworldChalice);
         
-        Chalice graveyardChalice = new Chalice("graveyard", 300);
+        Chalice graveyardChalice = new Chalice("graveyard", 50);
         addObject(graveyardChalice, 1000, 100);
         chalicesMap.add(graveyardChalice);
     }
@@ -271,12 +265,14 @@ public class MyWorld extends World {
     
     public void buyAllIslands(){
         for(Island island : islandsMap.values()){
-            island.setVisibility();
-            GreenfootImage image = island.getImage();
-            image.setTransparency(255);
-            island.setImage(image);
-            removeBorders(island.getName());
-            MyWorld.showChalice(island.getType());
+            if(!island.getType().contains("mainOverworld")){
+                island.setVisibility();
+                GreenfootImage image = new GreenfootImage(island.getType() + "Biome.png");
+                image.setTransparency(255);
+                island.setImage(image);
+                removeBorders(island.getName());
+                MyWorld.showChalice(island.getType());
+            }
         }
     }
     

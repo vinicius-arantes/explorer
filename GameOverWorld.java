@@ -18,6 +18,8 @@ public class GameOverWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 1000, 1); 
         Greenfoot.playSound("gameover.mp3");
+        EndGameStats stats = new EndGameStats();
+        addObject(stats, 90, 550);
     }
     
     public void act(){
@@ -27,4 +29,5 @@ public class GameOverWorld extends World
             Greenfoot.stop();   
         }
     }
+
 }

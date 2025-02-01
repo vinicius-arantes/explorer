@@ -80,8 +80,8 @@ public class Inventory extends Actor {
         // Adiciona o texto do número de Log
         GreenfootImage textoLog = new GreenfootImage("" + log, 15, Color.WHITE, new Color(0, 0, 0, 0));
         GreenfootImage madeiraIcon = new GreenfootImage("madeiraIcon.png");
-        imagem.drawImage(madeiraIcon, 99, 90);
-        imagem.drawImage(textoLog, 120, 108);
+        imagem.drawImage(madeiraIcon, 124, 90);
+        imagem.drawImage(textoLog, 145, 124);
 
         // Adiciona o texto do número de Stone
         GreenfootImage textoStone = new GreenfootImage("" + stone, 15, Color.WHITE, new Color(0, 0, 0, 0));

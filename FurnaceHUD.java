@@ -73,7 +73,9 @@ public class FurnaceHUD extends Actor
         ///imagem.drawImage(selectedImage, 0, 0); // Posiciona a imagem do slot selecionado no HUD
         
         // Adiciona o texto do número de Log
-        GreenfootImage textoLog = new GreenfootImage("Troncos Disponiveis " + Inventory.getLog(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage textoLog = new GreenfootImage("" + Inventory.getLog(), 15, Color.WHITE, new Color(0, 0, 0, 0));
+        GreenfootImage madeiraIcon = new GreenfootImage("madeiraIcon.png");
+        imagem.drawImage(madeiraIcon, 200, 200);
         imagem.drawImage(textoLog, 200, 200); // Posiciona o texto no HUD
         
         // Adiciona o texto do número de Copper Ore

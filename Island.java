@@ -109,7 +109,7 @@ public class Island extends Actor
         }else if(biomeType.contains("overworld")){
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            GreenfootImage image = getImage();
+            GreenfootImage image = new GreenfootImage("overworldPrice.png");
             image.setTransparency(0);
             setImage(image);
             maxTrees = 3;
@@ -131,8 +131,7 @@ public class Island extends Actor
         } else if(biomeType.contains("tundra")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            setImage("tundraBiome.png");
-            GreenfootImage image = getImage();
+            GreenfootImage image = new GreenfootImage("tundraPrice.png");
             image.setTransparency(0);
             setImage(image);
             maxTrees = 5;
@@ -154,8 +153,7 @@ public class Island extends Actor
         } else if(biomeType.contains("desert")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            setImage("desertBiome.png");
-            GreenfootImage image = getImage();
+            GreenfootImage image = new GreenfootImage("desertPrice.png");
             image.setTransparency(0);
             setImage(image);
             maxTrees = 7;
@@ -177,8 +175,7 @@ public class Island extends Actor
         } else if(biomeType.contains("heaven")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            setImage("heavenIsland.png");
-            GreenfootImage image = getImage();
+            GreenfootImage image = new GreenfootImage("heavenPrice.png");
             image.setTransparency(0);
             setImage(image);
             maxTrees = 4;
@@ -200,8 +197,7 @@ public class Island extends Actor
         } else if(biomeType.contains("graveyard")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            setImage("graveyardBiome.png");
-            GreenfootImage image = getImage();
+            GreenfootImage image = new GreenfootImage("graveyardPrice.png");
             image.setTransparency(0);
             setImage(image);
             maxTrees = 3;
@@ -223,7 +219,7 @@ public class Island extends Actor
         } else if(biomeType.contains("endPortal")) {
             this.biomeName = biomeName;
             this.biomeType = biomeType;
-            setImage("endPortal.png");
+            setImage("portalPrice.png");
             GreenfootImage image = getImage();
             image.setTransparency(0);
             setImage(image);
@@ -373,7 +369,7 @@ public class Island extends Actor
                 if(MyWorld.haveAllChalicesFullfilled()){
                     myWorld.addObject(new Warning("buyEndPortal", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
                 } else {
-                    myWorld.addObject(new Warning("cannotbuyEndPortal", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
+                    myWorld.addObject(new Warning("cannotBuyEndPortal", this), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
                 }
             } else {
                 myWorld.addObject(new Warning("notEnoughCoins"), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
@@ -392,6 +388,10 @@ public class Island extends Actor
         HUDCoins.setCoin(-price);
         MyWorld.showChalice(getType());
         Greenfoot.playSound("buyIsland.mp3");
+        setImage(getType() + "Biome.png");
+        if(getName().contains("desert1")){
+            getWorld().getObjects(Furnace.class).get(0).showFurnace();
+        }
     }
     
     public boolean haveObjectsAtTheseCords(int x, int y){
@@ -462,7 +462,9 @@ public class Island extends Actor
     public void endGame(){
         Actor explorer = getOneIntersectingObject(Explorer.class);
         if(explorer != null){
-            Greenfoot.setWorld(new EndGameWorld());         
+            Greenfoot.setWorld(new EndGameWorld());
+            Statistic.setStopStime();
+            Statistic.setXpAmount(Explorer.getTotalXp());
         }
     }
     
@@ -474,6 +476,8 @@ public class Island extends Actor
             Explorer.secretIncrease();
             Inventory.takeItenLog(1000);
             Inventory.takeItenCopperOre(1000);
+            Inventory.takeItenStone(1000);
+            myWorld.getObjects(Furnace.class).get(0).showFurnace();
         }
     }
 }

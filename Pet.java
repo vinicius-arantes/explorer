@@ -12,7 +12,6 @@ public class Pet extends Actor {
         if (isTyping) {
             captureInput();
         }
-        colisions();
         followExplorer();
     }
     
@@ -27,23 +26,6 @@ public class Pet extends Actor {
             setLocation(getX(), getY() + 1); // Move para baixo
         } else {
             setLocation(getX(), getY() - 1); // Move para baixo
-        }
-    }
-    
-    public void colisions(){
-        if(haveIntersectingObjects()){
-            if (Greenfoot.isKeyDown("w")) {
-                setLocation(getX(), getY() + 2); // Nega o movimento pra cima
-            }
-            if (Greenfoot.isKeyDown("s")) {
-                setLocation(getX(), getY() - 2); // Nega o movimento pra baixo
-            }
-            if (Greenfoot.isKeyDown("a")) {
-                setLocation(getX() + 2, getY()); // Nega o movimento pra esquerda
-            }
-            if (Greenfoot.isKeyDown("d")) {
-                setLocation(getX() - 2, getY()); // Nega o movimento pra direita
-            }
         }
     }
     

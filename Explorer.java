@@ -12,6 +12,7 @@ public class Explorer extends Actor
     private int damageCapabilityMobs;
     private static int life;
     private static int lifeMax;
+    private static int totalXp;
     private static int xp;
     private static int xpIncrease;
     private static int xpDificult;
@@ -75,11 +76,11 @@ public class Explorer extends Actor
         }
         if (Greenfoot.isKeyDown("a")) {
             setLocation(getX() - speed, getY()); // Move para a esquerda
-            setImage("mainCharac.png");
+            setImage("mainCharacLeft" + pickaxeLevel + ".png");
         }
         if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + speed, getY()); // Move para a direita
-            setImage("mainCharacRight.png");
+            setImage("mainCharacRight" + pickaxeLevel + ".png");
         }
     }
     
@@ -144,6 +145,7 @@ public class Explorer extends Actor
     
     public void gainXp(int quantidade){
         xp += quantidade * xpIncrease;
+        totalXp += xp;
         getWorld().getObjects(HUDXp.class).get(0).setAmount(xp);
     }
     
@@ -159,6 +161,7 @@ public class Explorer extends Actor
         if( xp >= 100 + xpDificult && xpLevel < 30){
             xpLevel++;
             xpPoint++;
+            xp -= 100 + xpDificult;
             if(xpLevel > 20){
                 xpDificult += 3500;
             }
@@ -174,7 +177,6 @@ public class Explorer extends Actor
             else{
                 xpDificult += 100;
             }
-            xp = 0;
             MyWorld myWorld = (MyWorld) getWorld();
             myWorld.getObjects(HUDXp.class).get(0).resetHud(xpDificult);
             myWorld.addObject(new Warning("notEnoughCoins"), myWorld.getWidth() / 2, myWorld.getHeight() / 2);
@@ -235,9 +237,19 @@ public class Explorer extends Actor
         damageCapabilityMobs += 25;
     }
     
+    public static int getTotalXp(){
+        return totalXp;
+    }
+    
+    public static int getXp(){
+        return xp;
+    }
+
     public void endGame(){
         if(life <= 0){
-            Greenfoot.setWorld(new GameOverWorld());        
+            Greenfoot.setWorld(new GameOverWorld());
+            Statistic.setStopStime();
+            Statistic.setXpAmount(totalXp);
         }
     }
 }

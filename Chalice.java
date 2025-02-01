@@ -17,13 +17,10 @@ public class Chalice extends Actor
         this.biomeType = biomeType;
         this.totalAmount = totalAmount;
         orbAmount = 0;
-        isVisible = true;
-        if(!biomeType.contains("overworld")){
-            GreenfootImage image = getImage();
-            image.setTransparency(0);
-            setImage(image);
-            isVisible = false;
-        }
+        GreenfootImage image = getImage();
+        image.setTransparency(0);
+        setImage(image);
+        isVisible = false;
     }
     
     /**
@@ -73,6 +70,7 @@ public class Chalice extends Actor
                     orbAmount++;
                     Inventory.setGraveyardOrb(-1);
                 }
+                updateHUD();
             }
         }
     }

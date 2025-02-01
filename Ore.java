@@ -58,6 +58,7 @@ public class Ore extends Actor
             double distance = Math.sqrt(Math.pow(explorer.getX() - getX(), 2) + Math.pow(explorer.getY() - getY(), 2));
             if(distance < 50){
                 life -= explorer.getDamageCapability();
+                Greenfoot.playSound("brake.mp3");
                 if(life < 100 && life > 50){
                     setImage(type + "Damaged75.png");
                 } else if (life < 75 && life > 25){
@@ -68,7 +69,8 @@ public class Ore extends Actor
             }
         }
         if(isTouching(Pet.class)){
-            life -= 500;
+            life -= 25;
+            Greenfoot.playSound("brake.mp3");
             if(life < 100 && life > 50){
                 setImage(type + "Damaged75.png");
             } else if (life < 75 && life > 25){

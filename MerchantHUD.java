@@ -9,10 +9,12 @@ import java.util.List;
 public class MerchantHUD extends Actor
 {
     private int page;
+    private int lastLevel;
     
     public MerchantHUD(int level){
         page = 1;
         haveEnoughItensToBuy("pickaxe", level);
+        lastLevel = level;
     }
     
     /**
@@ -49,13 +51,17 @@ public class MerchantHUD extends Actor
             if(page == 1){
                 payForUpgrade("pickaxe", explorer.get(0).getPickaxeLevel());
                 explorer.get(0).upgradePickaxe();
-                haveEnoughItensToBuy("pickaxe", explorer.get(0).getPickaxeLevel());
+                lastLevel++;
+                haveEnoughItensToBuy("pickaxe", explorer.get(0).getPickaxeLevel() + 1);
                 Greenfoot.delay(10);
+                getWorld().removeObject(this);
             } else if(page == 2){
                 payForUpgrade("backpack", explorer.get(0).getPickaxeLevel());
                 explorer.get(0).upgradeBackpack();
+                lastLevel++;
                 haveEnoughItensToBuy("backpack", explorer.get(0).getBackpackLevel());
                 Greenfoot.delay(10);
+                getWorld().removeObject(this);
             }
         }
     }
@@ -103,15 +109,15 @@ public class MerchantHUD extends Actor
     }
     
     public void payForUpgrade(String type, int lastLevel){
-        if(type.contains("pickaxe") && lastLevel == 1){
+        if(type.contains("pickaxe") && lastLevel == 0){
             HUDCoins.setCoin(-100);
-        } else if(type.contains("pickaxe") && lastLevel == 2){
+        } else if(type.contains("pickaxe") && lastLevel == 1){
             HUDCoins.setCoin(-1400);
-        } else if(type.contains("pickaxe") && lastLevel == 3){
+        } else if(type.contains("pickaxe") && lastLevel == 2){
             HUDCoins.setCoin(-3200);
-        } else if(type.contains("pickaxe") && lastLevel == 4){
+        } else if(type.contains("pickaxe") && lastLevel == 3){
             HUDCoins.setCoin(-5200);
-        } else if(type.contains("pickaxe") && lastLevel == 5){
+        } else if(type.contains("pickaxe") && lastLevel == 4){
             HUDCoins.setCoin(-11200);
         }
         
